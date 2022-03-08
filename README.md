@@ -23,7 +23,7 @@ CRUD機能、コメント機能、フォロー機能などを用いて交流し�
 - 子どもに関する事柄のアイデアやノウハウを得たいとき
 
 ## 設計書
-<!-- 提出後に作成 -->
+https://docs.google.com/spreadsheets/d/1Ux3WQLHM_LP1kIUsnrCMUadlbpBFdamAy-APPDQVKRQ/edit?usp=sharing
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1fFfLAMXrWN1H6ZmqrMMV-doTjZ75YzT9uMTe0R4a9a4/edit?usp=sharing
