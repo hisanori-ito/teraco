@@ -1,0 +1,7 @@
+<h1>Posts#index</h1>
+<% @posts.each do |post| %>
+  <p>title:<%= post.title %></p>
+  <p>thmbnail:<%= post.thumbnail %></p>
+  <p>video:<%= post.video %></p>
+  <p>content:<%= post.content %></p>
+<% end %>
