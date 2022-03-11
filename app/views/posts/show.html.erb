@@ -1,6 +1,10 @@
 <h1>Posts#show</h1>
 <p>title:<%= @post.title %></p>
-<p>thmbnail:<%= @post.thumbnail %></p>
+
+<% if @post.thumbnail? %>
+ <p>thmbnail:<%= image_tag @post.thumbnail.url %></p>
+<% end %>
+
 <p>video:<%= @post.video %></p>
 <p>content:<%= @post.content %></p>
 
