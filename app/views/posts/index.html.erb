@@ -1,0 +1,13 @@
+<h1>Posts#index</h1>
+<% @posts.each do |post| %>
+  <p>title:<%= post.title %></p>
+
+  <% if post.thumbnail? %>
+    <p>thmbnail:<%= image_tag post.thumbnail.url %></p>
+  <% end %>
+
+  <% if post.video? %>
+    <p>video:<%= video_tag(post.video.to_s, :controls => true) %></p>
+  <% end %>
+  <p>content:<%= post.content %></p>
+<% end %>

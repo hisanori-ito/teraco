@@ -1,0 +1,19 @@
+<h1>Posts#show</h1>
+<p>title:<%= @post.title %></p>
+
+<% if @post.thumbnail? %>
+    <p>thmbnail:<%= image_tag @post.thumbnail.url %></p>
+<% end %>
+
+<% if @post.video? %>
+    <p>video:<%= video_tag(@post.video.to_s, :controls => true) %></p>
+<% end %>
+
+<p>content:<%= @post.content %></p>
+
+<p>投稿者:<%= @post.user.name %></p>
+<p>投稿日:<%= @post.created_at.strftime("%Y/%m/%d") %></p>
+
+<% if @post.user == current_user %>
+  <%= link_to "削除", post_path(@post), method: :delete %>
+<% end %>
