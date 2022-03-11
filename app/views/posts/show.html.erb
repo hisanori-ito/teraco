@@ -2,10 +2,13 @@
 <p>title:<%= @post.title %></p>
 
 <% if @post.thumbnail? %>
- <p>thmbnail:<%= image_tag @post.thumbnail.url %></p>
+    <p>thmbnail:<%= image_tag @post.thumbnail.url %></p>
 <% end %>
 
-<p>video:<%= @post.video %></p>
+<% if @post.video? %>
+    <p>video:<%= video_tag(@post.video.to_s, :controls => true) %></p>
+<% end %>
+
 <p>content:<%= @post.content %></p>
 
 <p>投稿者:<%= @post.user.name %></p>
