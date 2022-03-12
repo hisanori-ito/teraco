@@ -1,0 +1,14 @@
+<h5>タグが<%=@tag.name%>の投稿一覧</h5>
+
+<% @tags.each do |tag|%>
+  <%=link_to tag.name, search_tag_path(tag_id: tag.id) %>
+  <%="(#{tag.posts.count})" %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <h6>
+    <%= link_to post_path(post.id) do %>
+      <%= post.title %>
+    <% end %>
+  </h6>
+<% end %>

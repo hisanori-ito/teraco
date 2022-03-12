@@ -1,4 +1,8 @@
 <h1>Posts#show</h1>
+
+<% @tags.each do |tag| %>
+  <p>🏷<%= tag.name %><%="(#{tag.posts.count})" %></p>
+<% end %>
 <p>title:<%= @post.title %></p>
 
 <% if @post.thumbnail? %>
