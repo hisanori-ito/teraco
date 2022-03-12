@@ -5,6 +5,11 @@
   <%= "(#{tag.posts.count})" %>
 <% end %>
 
+<%= form_with url: search_path, method: :get, local: true do |f| %>
+  <%= f.text_field :word, value: @word %>
+  <%= f.submit "検索" %>
+<% end %>
+
 <% @posts.each do |post| %>
   <p>title:<%= post.title %></p>
 

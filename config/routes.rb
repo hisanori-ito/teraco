@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   
   get 'search_tag' => 'posts#search_tag'
   
+  get 'search' => 'posts#search'
+  
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resource :relationships, only: [:create, :destroy]
     get 'follows' => 'relationships#follows', as: 'follows'
