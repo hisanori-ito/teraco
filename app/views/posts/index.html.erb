@@ -1,4 +1,10 @@
 <h1>Posts#index</h1>
+
+<% @tags.each do |tag| %>
+  <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
+  <%= "(#{tag.posts.count})" %>
+<% end %>
+
 <% @posts.each do |post| %>
   <p>title:<%= post.title %></p>
 
@@ -10,4 +16,8 @@
     <p>video:<%= video_tag(post.video.to_s, :controls => true) %></p>
   <% end %>
   <p>content:<%= post.content %></p>
+
+  🏷<%= post.tags.map(&:name).join(', ') %>
+
 <% end %>
+

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
   end
   
+  get 'search_tag' => 'posts#search_tag'
+  
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resource :relationships, only: [:create, :destroy]
     get 'follows' => 'relationships#follows', as: 'follows'
