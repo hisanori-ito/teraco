@@ -1,0 +1,11 @@
+<h1>Ralationships#follows</h1>
+<% if @users.exists? %>
+  <% @users.each do |user| %>
+    <%= user.name %>
+    <%= user.introduction %>
+    フォロー数:<%= user.follows.count %>
+    フォロワー数:<%= user.followers.count %>
+  <% end %>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

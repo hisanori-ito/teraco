@@ -1,4 +1,4 @@
-class RalationshipsController < ApplicationController
+class RelationshipsController < ApplicationController
   
   # フォローするとき
   def create
