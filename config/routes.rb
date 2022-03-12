@@ -22,5 +22,6 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get 'follows' => 'relationships#follows', as: 'follows'
     get 'followers' => 'relationships#followers', as: 'followers'
+    get 'bookmarks' => 'bookmarks#index', as: 'bookmarks'
   end
 end

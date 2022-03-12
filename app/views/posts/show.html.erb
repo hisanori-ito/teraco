@@ -22,7 +22,7 @@
 <% @post.comments.each do |comment| %>
   <%= comment.user.name %>
   <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-  
+
   <% if comment.user == current_user %>
     <%= link_to "コメントを削除", post_comment_path(comment.post, comment), method: :delete %>
   <% end %>
@@ -41,6 +41,12 @@
   <%= link_to post_favorites_path(@post), method: :create do %>
     🤍<%= @post.favorites.count %>
   <% end %>
+<% end %>
+
+<% if @post.bookmarked?(current_user) %>
+  📚<%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %>
+<% else %>
+  📚<%= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %>
 <% end %>
 
 <% if @post.user == current_user %>

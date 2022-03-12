@@ -1,0 +1,5 @@
+<% @bookmarks.each do |bookmark| %>
+  <%= link_to post_path(bookmark.post) do %>
+    <%= bookmark.post.title %>
+  <% end %>
+<% end %>
