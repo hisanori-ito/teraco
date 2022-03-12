@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   
   # carrierwave tumbnail用の記述
   mount_uploader :thumbnail, ThumbnailUploader
@@ -37,5 +38,10 @@ class Post < ApplicationRecord
   # 検索用の記述
   def self.search(word)
     where(["title like? OR content like?", "%#{word}%", "%#{word}%"])
+  end
+  
+  # ブックマーク用のメソッド
+  def bookmarked?(user)
+    bookmarks.where(user_id: user).exists?
   end
 end

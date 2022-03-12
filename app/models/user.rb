@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   
   # フォロー機能の記述
   # フォローを行うとき
