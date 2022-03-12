@@ -33,4 +33,9 @@ class Post < ApplicationRecord
       self.tags << new_post_tag
    end
   end
+  
+  # 検索用の記述
+  def self.search(word)
+    where(["title like? OR content like?", "%#{word}%", "%#{word}%"])
+  end
 end

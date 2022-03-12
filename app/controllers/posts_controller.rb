@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     post.destroy
     redirect_to posts_path
   end
-  
+
   # タグでの検索
   def search_tag
     @tags = Tag.all
@@ -50,6 +50,14 @@ class PostsController < ApplicationController
     @posts = @tag.posts
   end
 
+  # 普通の検索
+  def search
+    @posts = Post.search(params[:word])
+    @word = params[:word]
+    @tags = Tag.all
+    render 'index'
+  end
+ 
   private
 
   def post_params
