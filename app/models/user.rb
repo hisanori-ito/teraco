@@ -14,8 +14,8 @@ class User < ApplicationRecord
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   
   # viewで表示するとき
-  has_many :follows, through: :relationships, source: :follow
-  has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :follows, through: :relationships, source: :follower
+  has_many :followers, through: :reverse_relationships, source: :follow
   
   # フォローの際のメソッド
   # フォローしたとき
