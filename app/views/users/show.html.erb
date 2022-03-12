@@ -1,0 +1,14 @@
+<h1>Users#show</h1>
+
+<%= @user.name %>
+<%= @user.introduction %>
+<%= @user.email %>
+
+<% @posts.each do |post| %>
+  <p>title:<%= post.title %></p>
+  <p>content:<%= post.content %></p>
+<% end %>
+
+<% if @user == current_user %>
+  <%= link_to "削除", user_registration_path, method: :delete %>
+<% end %>
