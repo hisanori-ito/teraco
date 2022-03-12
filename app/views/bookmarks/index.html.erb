@@ -1,5 +1,9 @@
-<% @bookmarks.each do |bookmark| %>
-  <%= link_to post_path(bookmark.post) do %>
-    <%= bookmark.post.title %>
+<% if @user == current_user %>
+  <% @bookmarks.each do |bookmark| %>
+    <%= link_to post_path(bookmark.post) do %>
+      <%= bookmark.post.title %>
+    <% end %>
   <% end %>
+<% else %>
+ <p>調整中</p>
 <% end %>
