@@ -3,21 +3,21 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  
+
   # フォロー機能の記述
   # フォローを行うとき
   has_many :relationships, class_name: "Relationship", foreign_key: "follow_id", dependent: :destroy
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  
+
   # viewで表示するとき
   has_many :follows, through: :relationships, source: :follower
   has_many :followers, through: :reverse_relationships, source: :follow
-  
+
   # フォローの際のメソッド
   # フォローしたとき
   def follow(user_id)
@@ -31,5 +31,23 @@ class User < ApplicationRecord
   def following?(user)
     follows.include?(user)
   end
-  
+
+  # 通知機能の記述
+  # 自分からの通知
+  has_many :from_me_notifications, class_name: "Notification", foreign_key: "from_user_id", dependent: :destroy
+  # 相手からの通知
+  has_many :to_me_notifications, class_name: "Notification", foreign_key: "to_user_id", dependent: :destroy
+
+  # フォロー通知用のメソッド
+  def notification_follow!(current_user)
+    temp = Notification.where(["from_user_id = ? and to_user_id = ? and action = ? ",current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.from_me_notifications.new(
+        to_user_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
+  end
+
 end

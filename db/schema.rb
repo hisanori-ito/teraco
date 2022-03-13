@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_12_163531) do
+ActiveRecord::Schema.define(version: 2022_03_13_100007) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -32,6 +32,21 @@ ActiveRecord::Schema.define(version: 2022_03_12_163531) do
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "from_user_id", null: false
+    t.integer "to_user_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["from_user_id"], name: "index_notifications_on_from_user_id"
+    t.index ["post_id"], name: "index_notifications_on_post_id"
+    t.index ["to_user_id"], name: "index_notifications_on_to_user_id"
   end
 
   create_table "post_tags", force: :cascade do |t|

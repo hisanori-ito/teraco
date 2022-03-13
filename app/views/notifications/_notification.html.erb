@@ -1,0 +1,13 @@
+<% from_user = notification.from_user %>
+<% to_user = notification.to_user %>
+    
+<%= from_user.name %>さんが
+
+<% case notification.action
+  when "follow"%>
+    <p>あなたをフォローしました</p>
+  <% when "favorite" %>
+    <p>あなたの投稿にいいねしました</p>
+  <% when "comment" %>
+    <p>あなたの投稿にコメントしました</p>
+<% end %>

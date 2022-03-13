@@ -13,15 +13,17 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resource :bookmarks, only: [:create, :destroy]
   end
-  
+
   get 'search_tag' => 'posts#search_tag'
-  
+
   get 'search' => 'posts#search'
-  
+
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resource :relationships, only: [:create, :destroy]
     get 'follows' => 'relationships#follows', as: 'follows'
     get 'followers' => 'relationships#followers', as: 'followers'
     get 'bookmarks' => 'bookmarks#index', as: 'bookmarks'
   end
+
+  resources :notifications, only: [:index]
 end
