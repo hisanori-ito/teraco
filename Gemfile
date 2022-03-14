@@ -63,3 +63,11 @@ gem 'carrierwave', '~> 2.0'
 
 # 20220314追記
 gem 'dotenv-rails'
+
+gem 'omniauth', '2.0.0'
+
+gem 'omniauth-rails_csrf_protection'
+
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'

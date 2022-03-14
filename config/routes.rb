@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   
   # ↓メール機能追加により、ルーティングの記述変更
   devise_for :users, controllers: {
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
-
+  
   resources :posts do
     resources :comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
