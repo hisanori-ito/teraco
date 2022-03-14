@@ -60,3 +60,6 @@ gem 'devise'
 
 # 20220311追記
 gem 'carrierwave', '~> 2.0'
+
+# 20220314追記
+gem 'dotenv-rails'

@@ -41,3 +41,6 @@ yarn-debug.log*
 
 # carrierwave
 /public/uploads
+
+# mail
+/.env

@@ -5,8 +5,11 @@ Rails.application.routes.draw do
 
   root to: "homes#top"
   get "/about"=>"homes#about"
-
-  devise_for :users
+  
+  # ↓メール機能追加により、ルーティングの記述変更
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
 
   resources :posts do
     resources :comments, only: [:create, :destroy]
