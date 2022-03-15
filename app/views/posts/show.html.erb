@@ -11,7 +11,7 @@
 <% end %>
 
 <% if @post.video? %>
-    <p>video:<%= video_tag(@post.video.to_s, :controls => true) %></p>
+    <p>video:<%= video_tag(@post.video.to_s, :controls => true, size: "200x200") %></p>
 <% end %>
 
 <p class="contents">content:<%= @post.content %></p>

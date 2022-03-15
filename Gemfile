@@ -71,3 +71,6 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
+
+# 20220316追記
+gem 'mini_magick'
