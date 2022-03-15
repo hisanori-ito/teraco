@@ -26,18 +26,18 @@
   <% @post.comments.each do |comment| %>
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-  
+
     <% if comment.user == current_user %>
       <%= link_to "コメントを削除する", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-outline-danger" %>
     <% end %>
   <% end %>
-  
+
   <%= form_with model: [@post, @comment] do |f| %>
     <%= f.text_area :comment %>
-    <%= f.submit "送信する" , class: "btn btn-outline-info" %>
-    
+    <%= f.submit "📮送信する" , class: "btn btn-outline-info" %>
+
   <% end %>
-  
+
   <% if @post.favorited_by?(current_user) %>
     <%= link_to post_favorites_path(@post), method: :delete do %>
       ❤️<%= @post.favorites.count %>
@@ -47,13 +47,13 @@
       🤍<%= @post.favorites.count %>
     <% end %>
   <% end %>
-  
+
   <% if @post.bookmarked?(current_user) %>
     📚<%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %>
   <% else %>
     📚<%= link_to "ブックマークに追加", post_bookmarks_path(@post), method: :post %>
   <% end %>
-  
+
 <% else %>
   <div>
     <ul>
@@ -70,5 +70,5 @@
 <% end %>
 
 <% if @post.user == current_user %>
-  <%= link_to "💀記事を削除する", post_path(@post), method: :delete, class: "btn btn-outline-danger" %>
+  <%= link_to "🗑記事を削除する", post_path(@post), method: :delete, class: "btn btn-outline-danger" %>
 <% end %>

@@ -74,3 +74,5 @@ gem 'omniauth-google-oauth2'
 
 # 20220316追記
 gem 'mini_magick'
+
+gem 'impressionist'
