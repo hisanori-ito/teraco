@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get 'follows' => 'relationships#follows', as: 'follows'
     get 'followers' => 'relationships#followers', as: 'followers'
     get 'bookmarks' => 'bookmarks#index', as: 'bookmarks'
+    get 'favorites' => 'favorites#index', as: 'favorites'
   end
 
   resources :notifications, only: [:index]

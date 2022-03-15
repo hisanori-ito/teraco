@@ -1,7 +1,7 @@
 <% if @user == current_user %>
-  <% @bookmarks.each do |bookmark| %>
-    <%= link_to post_path(bookmark.post) do %>
-      <%= bookmark.post.title %>
+  <% @favorites.each do |favorite| %>
+    <%= link_to post_path(favorite.post) do %>
+      <%= favorite.post.title %>
     <% end %>
   <% end %>
 <% else %>
