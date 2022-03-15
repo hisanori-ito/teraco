@@ -16,6 +16,14 @@
       <%= post.title %>
     <% end %>
   </p>
+  
+  🏷<%= post.tags.map(&:name).join(', ') %>
+
+  💬<%= post.comments.count %>
+
+  ❤️<%= post.favorites.count %>
+
+  📚<%= post.bookmarks.count %>
 
   <% if post.thumbnail? %>
     <p>thmbnail:<%= image_tag post.thumbnail.url %></p>
@@ -24,16 +32,15 @@
   <% if post.video? %>
     <p>video:<%= video_tag(post.video.to_s, :controls => true) %></p>
   <% end %>
-  
+<div>
   <p>content:<%= post.content.truncate(5) %>
     <% if post.content.size >= 5 %>
-    <%= link_to post_path(post.id) do %>
-       <p>続きを読む</p>
+      <%= link_to post_path(post.id) do %>
+         <p>続きを読む</p>
+      <% end %>
     <% end %>
-  <% end %>
-</p>
-
-  🏷<%= post.tags.map(&:name).join(', ') %>
+  </p>
+</div>
 
 <% end %>
 
