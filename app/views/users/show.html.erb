@@ -18,5 +18,5 @@
 <% end %>
 
 <% if @user == current_user %>
-  <%= link_to "削除", user_registration_path, method: :delete %>
+  <%= link_to "😢退会する", user_registration_path, method: :delete, data: { confirm: '本当に退会しますか？あなたの記事は全て消えてしまいます！' } %>
 <% end %>

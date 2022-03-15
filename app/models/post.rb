@@ -88,4 +88,7 @@ class Post < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+  
+  # PageView用の追記
+  is_impressionable counter_cache: true
 end

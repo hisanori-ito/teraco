@@ -24,6 +24,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @tags = @post.tags
+    impressionist(@post, nil, unique: [:ip_address])
   end
 
   def edit
