@@ -1,8 +1,9 @@
-<h1>Posts#show</h1>
+<h1>記事詳細</h1>
 
 <% @tags.each do |tag| %>
   <p>🏷<%= tag.name %><%="(#{tag.posts.count})" %></p>
 <% end %>
+
 <p>title:<%= @post.title %></p>
 
 <% if @post.thumbnail? %>
@@ -15,9 +16,10 @@
 
 <p>content:<%= @post.content %></p>
 
-<p>投稿者:<%= @post.user.name %></p>
+<p>投稿者:<%= @post.user.name %>さん</p>
 <p>投稿日:<%= @post.created_at.strftime("%Y/%m/%d") %></p>
 
+<% if user_signed_in? %>
 <p>💬：<%= @post.comments.count %></p>
 <% @post.comments.each do |comment| %>
   <%= comment.user.name %>
@@ -47,6 +49,22 @@
   📚<%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %>
 <% else %>
   📚<%= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %>
+<% end %>
+
+<% else %>
+<div>
+  <ul>
+    <li>❤いいね</li>
+    <li>💬コメント</li>
+    <li>📖ブックマーク</li>
+  </ul>
+   は<%= link_to "ログイン", new_user_session_path %>しなければ使えません
+</div>
+
+<% end %>
+
+<% if @post.user == current_user %>
+  <%= link_to "編集", edit_post_path(@post) %>
 <% end %>
 
 <% if @post.user == current_user %>
