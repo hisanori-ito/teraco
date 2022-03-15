@@ -288,6 +288,7 @@ DEPENDENCIES
   dotenv-rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mini_magick
   omniauth (= 2.0.0)
   omniauth-facebook
   omniauth-google-oauth2
