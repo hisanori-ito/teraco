@@ -1,4 +1,4 @@
-<h1>Posts#index</h1>
+<h1>記事一覧</h1>
 
 <% @tags.each do |tag| %>
   <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
@@ -11,7 +11,11 @@
 <% end %>
 
 <% @posts.each do |post| %>
-  <p>title:<%= post.title %></p>
+  <p>title:
+    <%= link_to post_path(post.id) do %>
+      <%= post.title %>
+    <% end %>
+  </p>
 
   <% if post.thumbnail? %>
     <p>thmbnail:<%= image_tag post.thumbnail.url %></p>
@@ -20,9 +24,23 @@
   <% if post.video? %>
     <p>video:<%= video_tag(post.video.to_s, :controls => true) %></p>
   <% end %>
-  <p>content:<%= post.content %></p>
+  
+  <p>content:<%= post.content.truncate(5) %>
+    <% if post.content.size >= 5 %>
+    <%= link_to post_path(post.id) do %>
+       <p>続きを読む</p>
+    <% end %>
+  <% end %>
+</p>
 
   🏷<%= post.tags.map(&:name).join(', ') %>
 
 <% end %>
 
+<!--<!% @posts.each do |post| %>-->
+<!--  <div class="card">-->
+<!--    <!%= image_tag post.thumbnail.url, class: 'card-img-top' %>-->
+<!--    <!%= link_to post.title %>-->
+<!--    <!%= post.content %>-->
+<!--  </div>-->
+<!--<!% end %>-->
