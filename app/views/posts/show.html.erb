@@ -14,59 +14,61 @@
     <p>video:<%= video_tag(@post.video.to_s, :controls => true) %></p>
 <% end %>
 
-<p>content:<%= @post.content %></p>
+<p class="contents">content:<%= @post.content %></p>
 
 <p>投稿者:<%= @post.user.name %>さん</p>
 <p>投稿日:<%= @post.created_at.strftime("%Y/%m/%d") %></p>
 
+<!--↓ログインしなければいいね、コメント、ブックマークは使えない-->
 <% if user_signed_in? %>
-<p>💬：<%= @post.comments.count %></p>
-<% @post.comments.each do |comment| %>
-  <%= comment.user.name %>
-  <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
 
-  <% if comment.user == current_user %>
-    <%= link_to "コメントを削除", post_comment_path(comment.post, comment), method: :delete %>
+  <p>💬：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+  
+    <% if comment.user == current_user %>
+      <%= link_to "コメントを削除する", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-outline-danger" %>
+    <% end %>
   <% end %>
-<% end %>
-
-<%= form_with model: [@post, @comment] do |f| %>
-  <%= f.text_area :comment %>
-  <%= f.submit "送信する" %>
-<% end %>
-
-<% if @post.favorited_by?(current_user) %>
-  <%= link_to post_favorites_path(@post), method: :delete do %>
-    ❤️<%= @post.favorites.count %>
+  
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_area :comment %>
+    <%= f.submit "送信する" , class: "btn btn-outline-info" %>
+    
   <% end %>
-<% else %>
-  <%= link_to post_favorites_path(@post), method: :create do %>
-    🤍<%= @post.favorites.count %>
+  
+  <% if @post.favorited_by?(current_user) %>
+    <%= link_to post_favorites_path(@post), method: :delete do %>
+      ❤️<%= @post.favorites.count %>
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(@post), method: :create do %>
+      🤍<%= @post.favorites.count %>
+    <% end %>
   <% end %>
-<% end %>
-
-<% if @post.bookmarked?(current_user) %>
-  📚<%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %>
+  
+  <% if @post.bookmarked?(current_user) %>
+    📚<%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %>
+  <% else %>
+    📚<%= link_to "ブックマークに追加", post_bookmarks_path(@post), method: :post %>
+  <% end %>
+  
 <% else %>
-  📚<%= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %>
-<% end %>
-
-<% else %>
-<div>
-  <ul>
-    <li>❤いいね</li>
-    <li>💬コメント</li>
-    <li>📖ブックマーク</li>
-  </ul>
-   は<%= link_to "ログイン", new_user_session_path %>しなければ使えません
-</div>
-
+  <div>
+    <ul>
+      <li>❤️️いいね</li>
+      <li>💬コメント</li>
+      <li>📖ブックマーク</li>
+    </ul>
+     は<%= link_to "ログイン", new_user_session_path %>しなければ使えません
+  </div>
 <% end %>
 
 <% if @post.user == current_user %>
-  <%= link_to "編集", edit_post_path(@post) %>
+  <%= link_to "記事を編集する", edit_post_path(@post) %>
 <% end %>
 
 <% if @post.user == current_user %>
-  <%= link_to "削除", post_path(@post), method: :delete %>
+  <%= link_to "💀記事を削除する", post_path(@post), method: :delete, class: "btn btn-outline-danger" %>
 <% end %>
