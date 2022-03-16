@@ -1,5 +1,11 @@
 <h1>Users#show</h1>
 
+<% if @user.image? %>
+  profile:<%= image_tag @user.image.url %>
+<% else %>
+  profile:<%= image_tag "happy-faces-ga935fda3d_640.png"%>
+<% end %>
+
 <%= @user.name %>
 <%= @user.introduction %>
 <%= @user.email %>
@@ -18,5 +24,9 @@
 <% end %>
 
 <% if @user == current_user %>
+  <%= link_to "ブックマーク一覧", user_bookmarks_path(@user) %>
+  <%= link_to "いいね一覧", user_favorites_path(@user) %>
+  <%= link_to "フォロー確認", user_follows_path(@user) %>
+  <%= link_to "👕編集する", edit_user_path(@user) %>
   <%= link_to "😢退会する", user_registration_path, method: :delete, data: { confirm: '本当に退会しますか？あなたの記事は全て消えてしまいます！' } %>
 <% end %>

@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
+  # carrierwaveの記述
+  mount_uploader :image, ProfileImageUploader
+
   # フォロー機能の記述
   # フォローを行うとき
   has_many :relationships, class_name: "Relationship", foreign_key: "follow_id", dependent: :destroy
@@ -51,7 +54,7 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-  
+
   # ↓omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
