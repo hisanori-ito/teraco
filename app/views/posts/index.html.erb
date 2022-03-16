@@ -21,72 +21,40 @@
   <div class="row">
     <div>
       <% @posts.each do |post| %>
-        title:
-        <%= link_to post_path(post.id) do %>
-            <%= post.title %>
-        <% end %>
-
-        🏷<%= post.tags.map(&:name).join(', ') %>
-        💬<%= post.comments.count %>
-        ❤️<%= post.favorites.count %>
-        📚<%= post.bookmarks.count %>
-        👀<%= post.impressions_count %>
-
-        <% if post.thumbnail? %>
-          thmbnail:<%= image_tag post.thumbnail.url %>
-        <% else %>
-          thmbnail:<%= image_tag post.thumbnail.url %>
-        <% end %>
-
-        <% if post.video? %>
-          video:<%= video_tag(post.video.to_s, :controls => true) %>
-        <% end %>
-        
-        content:<%= post.content.truncate(5) %>
-        <% if post.content.size >= 5 %>
-          <%= link_to post_path(post.id) do %>
-            続きを読む
-          <% end %>
-        <% end %>
-        
-        
-          <div class="card shadow-lg rounded" style="width: 20rem;">
-            <div class="card-img-top">
-              <% if post.thumbnail? %>
-                <%= image_tag post.thumbnail.url, width: '100%', height: 'auto' %>
-              <% else %>
-                <%= image_tag "kids-g837321511_640.png" ,width: '100%', height: 'auto' %>
+        <div class="card shadow-lg rounded" style="width: 20rem;">
+          <div class="card-img-top">
+            <% if post.thumbnail? %>
+              <%= image_tag post.thumbnail.url, width: '100%', height: 'auto' %>
+            <% else %>
+              <%= image_tag "kids-g837321511_640.png" ,width: '100%', height: 'auto' %>
+            <% end %>
+          </div>
+          <div class="card-body pb-0">
+            🏷<%= post.tags.map(&:name).join(', ') %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to post_path(post) do %>
+                <%= post.title %>
+              <% end %>
+            </h5>
+            <p class="card-text">
+              <%= post.content.truncate(10) %>
+            </p>
+            <div class="btn btn-outline-info">
+              <%= link_to post_path(post) do %>
+                  続きを読む
               <% end %>
             </div>
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= link_to post_path(post) do %>
-                  <%= post.title %>
-                <% end %>
-              </h5>
-              <p class="card-text">
-                <%= post.content.truncate(10) %>
-              </p>
-              <div class="btn btn-outline-info">
-                <%= link_to post_path(post) do %>
-                    続きを読む
-                <% end %>
-              </div>
+            <div class="card-body pl-1 pb-0 pt-2">
+            💬<%= post.comments.count %>
+            ❤️<%= post.favorites.count %>
+            📚<%= post.bookmarks.count %>
+            👀<%= post.impressions_count %>
             </div>
           </div>
-        
+        </div>
       <% end %>
     </div>
   </div>
 </div>
-
-
-
-
-<!--<!% @posts.each do |post| %>-->
-<!--  <div class="card">-->
-<!--    <!%= image_tag post.thumbnail.url, class: 'card-img-top' %>-->
-<!--    <!%= link_to post.title %>-->
-<!--    <!%= post.content %>-->
-<!--  </div>-->
-<!--<!% end %>-->
