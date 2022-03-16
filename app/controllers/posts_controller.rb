@@ -52,6 +52,7 @@ class PostsController < ApplicationController
     @tags = Tag.all
     @tag = Tag.find(params[:tag_id])
     @posts = @tag.posts
+    render 'index'
   end
 
   # 普通の検索
