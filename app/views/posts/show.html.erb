@@ -1,31 +1,38 @@
 <div class="container">
   <div class="row">
-    <div>
-      <h1>記事詳細</h1>
-
+    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
+      <h2 class="font-weight-bold mt-3">記事詳細</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div "col-lg-12 px-5 px-sm-0 mx-auto">
       <% @tags.each do |tag| %>
-        <p>🏷<%= tag.name %><%="(#{tag.posts.count})" %></p>
+        🏷<%= tag.name %><%="(#{tag.posts.count})" %>
       <% end %>
-      
-      <p>title:<%= @post.title %></p>
-      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
+      <h3><%= @post.title %></h3>
+
       <% if @post.thumbnail? %>
-          <p>thmbnail:<%= image_tag @post.thumbnail.url %></p>
+          <%= image_tag @post.thumbnail.url %>
+      <% else %>
+          <%= image_tag "kids-g837321511_640.png" , width: '100%', height: 'auto' %>
       <% end %>
       
       <% if @post.video? %>
-          <p>video:<%= video_tag(@post.video.to_s, :controls => true, size: "200x200") %></p>
+          video:<%= video_tag(@post.video.to_s, :controls => true, size: "200x200") %>
       <% end %>
       
-      <p class="contents">content:<%= @post.content %></p>
+      <p class="contents"><%= @post.content %></p>
       
       <p>投稿者:<%= @post.user.name %>さん</p>
       <p>投稿日:<%= @post.created_at.strftime("%Y/%m/%d") %></p>
       
       <!--↓ログインしなければいいね、コメント、ブックマークは使えない-->
       <% if user_signed_in? %>
-      
-        <p>💬<%= @post.comments.count %></p>
+        💬：<%= @post.comments.count %>
         <% @post.comments.each do |comment| %>
           <%= comment.user.name %>
           <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
@@ -38,7 +45,6 @@
         <%= form_with model: [@post, @comment] do |f| %>
           <%= f.text_area :comment %>
           <%= f.submit "📮コメント" , class: "btn btn-outline-info" %>
-      
         <% end %>
       
         <% if @post.favorited_by?(current_user) %>
@@ -58,14 +64,12 @@
         <% end %>
       
       <% else %>
-        <div>
-          <ul>
-            <li>❤️️いいね</li>
-            <li>💬コメント</li>
-            <li>📖ブックマーク</li>
-          </ul>
-           は<%= link_to "ログイン", new_user_session_path %>しなければ使えません
-        </div>
+        <ul>
+          <li>❤️️いいね</li>
+          <li>💬コメント</li>
+          <li>📖ブックマーク</li>
+        </ul>
+         は<%= link_to "ログイン", new_user_session_path %>しなければ使えません
       <% end %>
       
       <% if @post.user == current_user %>

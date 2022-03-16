@@ -22,13 +22,11 @@
     <div>
       <% @posts.each do |post| %>
         <div class="card shadow-lg rounded" style="width: 20rem;">
-          <div class="card-img-top">
-            <% if post.thumbnail? %>
-              <%= image_tag post.thumbnail.url, width: '100%', height: 'auto' %>
-            <% else %>
-              <%= image_tag "kids-g837321511_640.png" ,width: '100%', height: 'auto' %>
-            <% end %>
-          </div>
+          <% if post.thumbnail? %>
+            <%= image_tag post.thumbnail.url, class: "card-img-top", width: '100%', height: 'auto' %>
+          <% else %>
+            <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
+          <% end %>
           <div class="card-body pb-0">
             🏷<%= post.tags.map(&:name).join(', ') %>
           </div>
