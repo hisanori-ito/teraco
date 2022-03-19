@@ -9,13 +9,13 @@
       <div>
         <div>
           <% if @user.image? %>
-            <%= image_tag @user.image.url, class: "rounded-circle", width: '70%', height: 'auto' %>
+            <%= image_tag @user.image.url, class: "rounded-circle shadow-lg", width: '70%', height: 'auto' %>
           <% else %>
-            <%= image_tag "happy-faces-ga935fda3d_640.png", class: "rounded-circle", width: '70%', height: 'auto' %>
+            <%= image_tag "kids-g837321511_640.png", class: "rounded-circle", width: '70%', height: 'auto' %>
           <% end %>
         </div>
         <div id="follow">
-            <%= render 'relationships/follow', user:@user %>
+          <%= render 'relationships/follow', user:@user %>
         </div>
         <div class="d-flex justify-content-around pr-5">
           <%= link_to "フォロー", user_follows_path(@user) %>
