@@ -1,11 +1,55 @@
-<% if @user == current_user %>
-  <% @bookmarks.each do |bookmark| %>
-    <%= link_to post_path(bookmark.post) do %>
-      <%= bookmark.post.title %>
-    <% end %>
-  <% end %>
-<% else %>
-  <%= link_to user_path(@user.id) do %>
-    <p>マイページへ戻る</p>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
+      <h2 class="font-weight-bold mt-3">ブックマークした記事</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
+      <% if @user == current_user %>
+        <% @bookmarks.each do |bookmark| %>
+          <div class="card shadow-lg rounded" style="width: 20rem;">
+            <% if bookmark.post.thumbnail? %>
+              <%= image_tag bookmark.post.thumbnail.url, class: "card-img-top", width: '100%', height: 'auto' %>
+            <% else %>
+              <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
+            <% end %>
+            <div class="card-body pb-0">
+              🏷<%= bookmark.post.tags.map(&:name).join(', ') %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to post_path(bookmark.post) do %>
+                  <%= bookmark.post.title %>
+                <% end %>
+              </h5>
+              <p class="card-text">
+                <%= bookmark.post.content.truncate(10) %>
+              </p>
+              <div class="btn btn-outline-info">
+                <%= link_to post_path(bookmark.post) do %>
+                    続きを読む
+                <% end %>
+              </div>
+              <div class="card-body pl-1 pb-0 pt-2">
+              💬<%= bookmark.post.comments.count %>
+              ❤️<%= bookmark.post.favorites.count %>
+              📚<%= bookmark.post.bookmarks.count %>
+              👀<%= bookmark.post.impressions_count %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(@user.id) do %>
+            <p>マイページへ戻る</p>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+  
