@@ -30,7 +30,6 @@
       <% else %>
           <%= image_tag "kids-g837321511_640.png" , width: '100%', height: 'auto' %>
       <% end %>
-
       <% if @post.video? %>
           video:<%= video_tag(@post.video.to_s, :controls => true, size: "200x200") %>
       <% end %>
@@ -61,7 +60,7 @@
         <ul>
           <li>❤️️いいね</li>
           <li>💬コメント</li>
-          <li>📖ブックマーク</li>
+          <li>📚ブックマーク</li>
         </ul>
          は<%= link_to "ログイン", new_user_session_path %>しなければ使えません
       <% end %>

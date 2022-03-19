@@ -1,32 +1,101 @@
-<h1>Users#show</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
+      <h2 class="font-weight-bold mt-3">ユーザーページ</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 mx-auto">
+      <div>
+        <div>
+          <% if @user.image? %>
+            <%= image_tag @user.image.url, class: "rounded-circle", width: '70%', height: 'auto' %>
+          <% else %>
+            <%= image_tag "happy-faces-ga935fda3d_640.png", class: "rounded-circle", width: '70%', height: 'auto' %>
+          <% end %>
+        </div>
+        <div id="follow">
+            <%= render 'relationships/follow', user:@user %>
+        </div>
+        <div class="d-flex justify-content-around pr-5">
+          <%= link_to "フォロー", user_follows_path(@user) %>
+          <%= link_to "フォロワー", user_followers_path(@user) %>
+        </div>
+        <div class="d-flex justify-content-around pr-5">
+          <%= link_to "❤️いいねした記事", user_favorites_path(@user) %>
+          <% if @user == current_user %>
+            <%= link_to "📚ブックマークした記事", user_bookmarks_path(@user) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column justify-content-between col-lg-6 mx-auto w-100", >
+      <div class="h-25">
+        <%= @user.name %><br>
+      </div>
+      <div class="h-50">
+        <% if @user.introduction? %>
+          <%= @user.introduction %>
+        <% else %>
+          まだ紹介文はありません
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-around align-text-bottom h-25">
+        <% if @user == current_user %>
+          <div>
+            <%= link_to "👕編集する", edit_user_path(@user), class: "btn btn-outline-info" %>
+          </div>
+          <div>
+            <%= link_to "😢退会する", user_registration_path, method: :delete, data: { confirm: '本当に退会しますか？あなたの記事は全て消えてしまいます！' }, class: "btn btn-outline-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
+      <h2 class="font-weight-bold mt-3">投稿記事</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <% if @posts.count == 0 %>
+        該当する記事はありませんでした😔
+      <% end %>
 
-<% if @user.image? %>
-  profile:<%= image_tag @user.image.url %>
-<% else %>
-  profile:<%= image_tag "happy-faces-ga935fda3d_640.png" %>
-<% end %>
-
-<%= @user.name %>
-<%= @user.introduction %>
-<%= @user.email %>
-
-<% @posts.each do |post| %>
-  <p>title:<%= post.title %></p>
-  <p>content:<%= post.content %></p>
-<% end %>
-
-<% if @user != current_user %>
-  <% if current_user.following?(@user) %>
-    <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
-  <% else %>
-    <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
-  <% end %>
-<% end %>
-
-<% if @user == current_user %>
-  <%= link_to "ブックマーク一覧", user_bookmarks_path(@user) %>
-  <%= link_to "いいね一覧", user_favorites_path(@user) %>
-  <%= link_to "フォロー確認", user_follows_path(@user) %>
-  <%= link_to "👕編集する", edit_user_path(@user) %>
-  <%= link_to "😢退会する", user_registration_path, method: :delete, data: { confirm: '本当に退会しますか？あなたの記事は全て消えてしまいます！' } %>
-<% end %>
+      <% @posts.each do |post| %>
+        <div class="card shadow-lg rounded" style="width: 20rem;">
+          <% if post.thumbnail? %>
+            <%= image_tag post.thumbnail.url, class: "card-img-top", width: '100%', height: 'auto' %>
+          <% else %>
+            <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
+          <% end %>
+          <div class="card-body pb-0">
+            🏷<%= post.tags.map(&:name).join(', ') %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to post_path(post) do %>
+                <%= post.title %>
+              <% end %>
+            </h5>
+            <p class="card-text">
+              <%= post.content.truncate(10) %>
+            </p>
+            <div class="btn btn-outline-info">
+              <%= link_to post_path(post) do %>
+                  続きを読む
+              <% end %>
+            </div>
+            <div class="card-body pl-1 pb-0 pt-2">
+            💬<%= post.comments.count %>
+            ❤️<%= post.favorites.count %>
+            📚<%= post.bookmarks.count %>
+            👀<%= post.impressions_count %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
