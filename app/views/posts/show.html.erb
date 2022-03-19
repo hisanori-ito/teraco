@@ -12,57 +12,42 @@
     </div>
   </div>
   <div class="row">
+    <div class="my-3 d-flex justify-content-start align-items-end col-lg-12 px-5 px-sm-0 mx-auto">
+      <h3 class="mr-3"><%= @post.title %></h3>
+      <h5 class="mx-5 pt-2">投稿者 
+          <%= link_to user_path(@post.user) do %>
+            <%= @post.user.name %>
+          <% end %>
+          さん
+      </h5>
+      <h6 class="pt-2">投稿日:<%= @post.created_at.strftime("%Y/%m/%d") %></h6>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-lg-12 px-5 px-sm-0 mx-auto">
-      <h3><%= @post.title %></h3>
-
       <% if @post.thumbnail? %>
           <%= image_tag @post.thumbnail.url %>
       <% else %>
           <%= image_tag "kids-g837321511_640.png" , width: '100%', height: 'auto' %>
       <% end %>
-      
+
       <% if @post.video? %>
           video:<%= video_tag(@post.video.to_s, :controls => true, size: "200x200") %>
       <% end %>
-      
+    </div>
+  </div>
+  <div class="row">
+    <div class="mt-4 col-lg-12 px-5 px-sm-0 mx-auto">
       <p class="contents"><%= @post.content %></p>
-      
-      <p>投稿者:<%= @post.user.name %>さん</p>
-      <p>投稿日:<%= @post.created_at.strftime("%Y/%m/%d") %></p>
-      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
       <!--↓ログインしなければいいね、コメント、ブックマークは使えない-->
       <% if user_signed_in? %>
-        💬：<%= @post.comments.count %>
-        <% @post.comments.each do |comment| %>
-          <%= comment.user.name %>
-          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-      
-          <% if comment.user == current_user %>
-            <%= link_to "コメントを削除する", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-outline-danger" %>
-          <% end %>
-        <% end %>
-      
-        <%= form_with model: [@post, @comment] do |f| %>
-          <%= f.text_area :comment %>
-          <%= f.submit "📮コメント" , class: "btn btn-outline-info" %>
-        <% end %>
-      
-        <% if @post.favorited_by?(current_user) %>
-          <%= link_to post_favorites_path(@post), method: :delete do %>
-            ❤️<%= @post.favorites.count %>
-          <% end %>
-        <% else %>
-          <%= link_to post_favorites_path(@post), method: :create do %>
-            🤍<%= @post.favorites.count %>
-          <% end %>
-        <% end %>
-      
-        <% if @post.bookmarked?(current_user) %>
-          📚<%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %>
-        <% else %>
-          📚<%= link_to "ブックマークに追加", post_bookmarks_path(@post), method: :post %>
-        <% end %>
-      
+        <%= render 'posts/comment', {post:@post, comment:@comment} %>
+        <%= render 'posts/favorite', post:@post %>
+        <%= render 'posts/bookmark', post:@post %>
       <% else %>
         <ul>
           <li>❤️️いいね</li>
@@ -71,14 +56,20 @@
         </ul>
          は<%= link_to "ログイン", new_user_session_path %>しなければ使えません
       <% end %>
-      
-      <% if @post.user == current_user %>
-        <%= link_to "記事を編集する", edit_post_path(@post) %>
-      <% end %>
-      
-      <% if @post.user == current_user %>
-        <%= link_to "🗑記事を削除する", posts_path, method: :delete, class: "btn btn-outline-danger" %>
-      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex justify-content-around col-lg-12 px-5 px-sm-0 mx-auto">
+      <div>
+        <% if @post.user == current_user %>
+          <%= link_to "記事を編集する", edit_post_path(@post), class: "btn btn-outline-info" %>
+        <% end %>
+      </div>
+      <div>
+        <% if @post.user == current_user %>
+          <%= link_to "🗑記事を削除する", posts_path, method: :delete, class: "btn btn-outline-danger" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
