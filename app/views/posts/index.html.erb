@@ -14,12 +14,16 @@
     <div class="col-6 mx-auto">
       <%= form_with url: search_path, method: :get, local: true do |f| %>
         <%= f.text_field :word, value: @word, placeholder: "記事の検索" %>
-        <%= f.submit "検索", class: "btn btn-outline-info" %>
+        <%= f.submit "🔍", class: "btn btn-outline-info" %>
       <% end %>
     </div>
   </div>
   <div class="row">
     <div>
+      <% if @posts.count == 0 %>
+        該当する記事はありませんでした😔
+      <% end %>
+      
       <% @posts.each do |post| %>
         <div class="card shadow-lg rounded" style="width: 20rem;">
           <% if post.thumbnail? %>
