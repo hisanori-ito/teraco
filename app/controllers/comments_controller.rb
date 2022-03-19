@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.post_id = @post.id
     @comment.save
+    @comment = Comment.new
     @post.notification_comment!(current_user, @comment.id)
   end
 
