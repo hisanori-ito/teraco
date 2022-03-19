@@ -1,0 +1,11 @@
+<div class="border-left border-info pl-3">
+  <% post.comments.each do |comment| %>
+    <%= link_to user_path(comment.user) do %>
+      <%= comment.user.name %>
+    <% end %>さん | <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+    <%= comment.comment %><br>
+    <% if comment.user == current_user %>
+      <%= link_to "コメントを削除する", post_comment_path(comment.post, comment), remote:true, method: :delete, class: "btn btn-outline-danger my-2" %><br>
+    <% end %>
+  <% end %>
+</div>

@@ -45,9 +45,18 @@
     <div class="col-lg-12 px-5 px-sm-0 mx-auto">
       <!--↓ログインしなければいいね、コメント、ブックマークは使えない-->
       <% if user_signed_in? %>
-        <%= render 'posts/comment', {post:@post, comment:@comment} %>
-        <%= render 'posts/favorite', post:@post %>
-        <%= render 'posts/bookmark', post:@post %>
+        <div id="comment_area">
+          <%= render 'comments/comment', post:@post %>
+        </div>
+        <div id="comment_form">
+          <%= render 'comments/form', { post:@post, comment:@comment } %>
+        </div>
+        <div id="favorite">
+          <%= render 'favorites/favorite', post:@post %>
+        </div>
+        <div id="bookmark">
+          <%= render 'bookmarks/bookmark', post:@post %>
+        </div>
       <% else %>
         <ul>
           <li>❤️️いいね</li>
