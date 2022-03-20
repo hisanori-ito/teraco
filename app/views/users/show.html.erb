@@ -24,7 +24,7 @@
         <div class="d-flex justify-content-around pr-5">
           <%= link_to "❤️いいねした記事", user_favorites_path(@user) %>
           <% if @user == current_user %>
-            <%= link_to "📚ブックマークした記事", user_bookmarks_path(@user) %>
+            <%= link_to "🔖ブックマークした記事", user_bookmarks_path(@user) %>
           <% end %>
         </div>
       </div>
@@ -90,7 +90,7 @@
             <div class="card-body pl-1 pb-0 pt-2">
             💬<%= post.comments.count %>
             ❤️<%= post.favorites.count %>
-            📚<%= post.bookmarks.count %>
+            🔖<%= post.bookmarks.count %>
             👀<%= post.impressions_count %>
             </div>
           </div>

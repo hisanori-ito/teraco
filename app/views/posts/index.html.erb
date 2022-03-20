@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
-      <h2 class="font-weight-bold mt-3">記事一覧</h2>
-    </div>
-  </div>
+  <!--<div class="row">-->
+  <!--  <div class="col-lg-12 px-5 px-sm-0 mx-auto">-->
+  <!--    <h2 class="font-weight-bold mt-3">記事一覧</h2>-->
+  <!--  </div>-->
+  <!--</div>-->
   <div class="row">
     <div class="col-lg-6 mx-auto">
       <% @tags.each do |tag| %>
@@ -24,39 +24,46 @@
         該当する記事はありませんでした😔
       <% end %>
       
-      <% @posts.each do |post| %>
-        <div class="card shadow-lg rounded" style="width: 20rem;">
-          <% if post.thumbnail? %>
-            <%= image_tag post.thumbnail.url, class: "card-img-top", width: '100%', height: 'auto' %>
-          <% else %>
-            <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
-          <% end %>
-          <div class="card-body pb-0">
-            🏷<%= post.tags.map(&:name).join(', ') %>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">
-              <%= link_to post_path(post) do %>
-                <%= post.title %>
+      <div class="d-flex flex-wrap ">
+        <% @posts.each do |post| %>
+          <div class="card shadow-lg rounded w-25" style="width: 20rem;">
+            <% if post.thumbnail? %>
+              <%= image_tag post.thumbnail.url, class: "card-img-top", width: '100%', height: 'auto' %>
+            <% else %>
+              <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
+            <% end %>
+            <div class="card-body pb-0">
+              <% post.tags.each do |tag| %>
+                <%= link_to search_tag_path(tag_id: tag.id) do %>
+                  🏷<%= tag.name %>
+                <% end %>
               <% end %>
-            </h5>
-            <p class="card-text">
-              <%= post.content.truncate(10) %>
-            </p>
-            <div class="btn btn-outline-info">
-              <%= link_to post_path(post) do %>
-                  続きを読む
-              <% end %>
+              <!--<#%= post.tags.map(&:name).join(', ') %>-->
             </div>
-            <div class="card-body pl-1 pb-0 pt-2">
-            💬<%= post.comments.count %>
-            ❤️<%= post.favorites.count %>
-            📚<%= post.bookmarks.count %>
-            👀<%= post.impressions_count %>
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to post_path(post) do %>
+                  <%= post.title %>
+                <% end %>
+              </h5>
+              <p class="card-text">
+                <%= post.content.truncate(10) %>
+              </p>
+              <div class="btn btn-outline-info">
+                <%= link_to post_path(post) do %>
+                    続きを読む
+                <% end %>
+              </div>
+              <div class="card-body pl-1 pb-0 pt-2">
+              💬<%= post.comments.count %>
+              ❤️<%= post.favorites.count %>
+              🔖<%= post.bookmarks.count %>
+              👀<%= post.impressions_count %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
