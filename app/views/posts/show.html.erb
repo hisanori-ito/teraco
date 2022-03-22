@@ -92,7 +92,7 @@
       </div>
       <div>
         <% if @post.user == current_user %>
-          <%= link_to "🗑記事を削除する", posts_path, method: :delete, class: "btn btn-outline-danger" %>
+          <%= link_to "🗑記事を削除する", post_path, method: :delete, class: "btn btn-outline-danger" %>
         <% end %>
       </div>
     </div>

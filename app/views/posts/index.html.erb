@@ -33,11 +33,15 @@
               <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
             <% end %>
             <div class="card-body pb-0">
+              <!--<!% if post.tags.count == 0 %>-->
+              <!--  <p>タグはまだありません</p>-->
+              <!--<!% else %>-->
               <% post.tags.each do |tag| %>
                 <%= link_to search_tag_path(tag_id: tag.id) do %>
                   🏷<%= tag.name %>
                 <% end %>
               <% end %>
+              <!--<!% end %>-->
               <!--<#%= post.tags.map(&:name).join(', ') %>-->
             </div>
             <div class="card-body">
