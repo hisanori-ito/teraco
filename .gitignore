@@ -42,5 +42,5 @@ yarn-debug.log*
 # for carrierwave
 /public/uploads
 
-# for mail SNSauth
+# for mail SNSauth deploy
 /.env

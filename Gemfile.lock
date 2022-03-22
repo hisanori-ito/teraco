@@ -136,6 +136,7 @@ GEM
     msgpack (1.4.5)
     multi_json (1.15.0)
     multi_xml (0.6.0)
+    mysql2 (0.5.3)
     nio4r (2.5.8)
     nokogiri (1.13.3)
       mini_portile2 (~> 2.8.0)
@@ -172,8 +173,7 @@ GEM
       rack
     orm_adapter (0.5.0)
     public_suffix (4.0.6)
-    puma (5.6.2)
-      nio4r (~> 2.0)
+    puma (3.12.6)
     racc (1.6.0)
     rack (2.2.3)
     rack-mini-profiler (2.3.4)
@@ -292,12 +292,13 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mini_magick
+  mysql2
   omniauth (= 2.0.0)
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   omniauth-twitter
-  puma (~> 5.0)
+  puma (~> 3.11)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
   sass-rails (>= 6)
