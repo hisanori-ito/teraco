@@ -1,7 +1,7 @@
-<h1>Users#index</h1>
-
-<% @users.each do |user| %>
-  <%= link_to user_path(user) do %>
-    name:<%= user.name %>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render "users/index", { users: @users } %>
+    </div>
+  </div>
+</div>
