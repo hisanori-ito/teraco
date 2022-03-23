@@ -1,32 +1,39 @@
-<h2>Log in</h2>
-
-<%= form_with model:@user, url:user_session_path do |f| %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h2 class="font-weight-bold mt-4">ログイン</h2>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+  <div class="row">
+    <div class="col-lg-12 text-center ">
+      <%= form_with model:@user, url:user_session_path do |f| %>
+        <div class="field mt-4">
+          <%= f.label :name, "名前" %><br />
+          <%= f.text_field :name, class: "border border-info rounded-pill" %>
+        </div>
+        <div class="field mt-4">
+          <%= f.label :email, "メールアドレス" %><br />
+          <%= f.email_field :email, autocomplete: "email", class: "border border-info rounded-pill" %>
+        </div>
+        <div class="field mt-4">
+          <%= f.label :password, "パスワード" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "border border-info rounded-pill" %>
+        </div>
+      
+        <% if devise_mapping.rememberable? %>
+          <div class="field mt-5">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+      
+        <div class="actions mt-5 mb-3">
+          <%= f.submit "ログイン", class: "btn btn-outline-info" %>
+        </div>
+      <% end %>
+      
+      <%#= render "devise/shared/links" %>
 
-<%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
