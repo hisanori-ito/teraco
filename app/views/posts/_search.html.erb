@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-6 mt-3">
+    <% tags.each do |tag| %>
+      <%= link_to tag.name, search_tag_path(tag_id: tag.id) %>
+      <%= "(#{tag.posts.count})" %>
+    <% end %>
+  </div>
+  <div class="col-lg-6 mt-3 text-right">
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :word, value: word, placeholder: "記事の検索" %>
+      <%= f.submit "🔍", class: "btn btn-outline-info" %>
+    <% end %>
+  </div>
+</div>
