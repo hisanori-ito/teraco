@@ -1,13 +1,26 @@
 <% from_user = notification.from_user %>
 <% to_user = notification.to_user %>
-    
-<%= from_user.name %>さんが
+
+<%= link_to user_path(from_user) do %>   
+  <%= from_user.name %>
+<% end %>
+さんが
 
 <% case notification.action
   when "follow"%>
-    <p>あなたをフォローしました</p>
+    <p>あなたをフォローしました！</p>
   <% when "favorite" %>
-    <p>あなたの投稿にいいねしました</p>
+    <p>
+      <%= link_to post_path(notification.post) do %>
+        あなたの投稿
+      <% end %>にいいねしました！
+    </p>
   <% when "comment" %>
-    <p>あなたの投稿にコメントしました</p>
+    <p>
+      <%= link_to post_path(notification.post) do %>
+        あなたの投稿
+      <% end %>にコメントしました！
+    </p>
 <% end %>
+
+<%= time_ago_in_words(notification.created_at).upcase %> ago

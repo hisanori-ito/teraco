@@ -48,15 +48,16 @@ class Post < ApplicationRecord
   
   # いいね通知用メソッド
   def notification_favorite!(current_user)
-    temp = Notification.where(["from_user_id = ? and to_user_id = ? and post_id = ? and action = ? ", current_user.id, user_id, id, 'favorite'])
-    # いいねされていない場合のみ、通知レコードを作成
+    # ↓いいねされているか確認する
+    temp = Notification.where(["from_user_id = ? and to_user_id = ? and post_id = ? and action = ? ", current_user.id, user_id, id, "favorite"])
+    # ↓いいねされていない場合通知レコードを作成
     if temp.blank?
       notification = current_user.from_me_notifications.new(
         post_id: id,
         to_user_id: user_id,
-        action: 'favorite'
+        action: "favorite"
       )
-      # 自分の投稿に対するいいねの場合は、通知済みとする
+      # ↓自分の投稿に対するいいねは、通知済みとする
       if notification.from_user_id == notification.to_user_id
         notification.checked = true
       end
@@ -66,7 +67,7 @@ class Post < ApplicationRecord
   
   # コメント通知用メソッド
   def notification_comment!(current_user, comment_id)
-    # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
+    # ↓自分以外にコメントしている人をすべて取得し全員に通知を送る
     temp_ids = Comment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
     temp_ids.each do |temp_id|
       save_notification_comment!(current_user, comment_id, temp_id['user_id'])
@@ -75,12 +76,12 @@ class Post < ApplicationRecord
   end
   
   def save_notification_comment!(current_user, comment_id, to_user_id)
-    # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
+    # コメントは複数回することが考えられるため１つの投稿に複数回通知する
     notification = current_user.from_me_notifications.new(
       post_id: id,
       comment_id: comment_id,
       to_user_id: to_user_id,
-      action: 'comment'
+      action: "comment"
     )
     # 自分の投稿に対するコメントの場合は、通知済みとする
     if notification.from_user_id == notification.to_user_id

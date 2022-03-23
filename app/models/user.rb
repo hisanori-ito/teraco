@@ -45,11 +45,11 @@ class User < ApplicationRecord
 
   # フォロー通知用のメソッド
   def notification_follow!(current_user)
-    temp = Notification.where(["from_user_id = ? and to_user_id = ? and action = ? ",current_user.id, id, 'follow'])
+    temp = Notification.where(["from_user_id = ? and to_user_id = ? and action = ? ",current_user.id, id, "follow"])
     if temp.blank?
       notification = current_user.from_me_notifications.new(
         to_user_id: id,
-        action: 'follow'
+        action: "follow"
       )
       notification.save if notification.valid?
     end
