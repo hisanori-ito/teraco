@@ -4,8 +4,9 @@
     <div class="col-lg-12">
       <% if @posts.count == 0 %>
         該当する記事はありませんでした😔
+      <% else %>
+        <%= render "posts/index", { posts: @posts } %>
       <% end %>
-      <%= render "posts/index", { posts: @posts } %>
     </div>
   </div>
 </div>
