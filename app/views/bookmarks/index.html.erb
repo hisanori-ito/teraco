@@ -11,6 +11,7 @@
           ブックマークした記事はありません😔
         <% else %>
           <%= render "bookmarks/index", { bookmarks: @bookmarks } %>
+          <%= paginate(@bookmarks) %>
         <% end %>
       <% else %>
         <%= link_to user_path(@user.id) do %>

@@ -59,6 +59,7 @@
           <p class="text-center">まだ記事を投稿していません</p>
         <% else %>
           <%= render "posts/index", { posts: @posts } %>
+          <%= paginate(@posts) %>
         <% end %>
       </div>
     </div>

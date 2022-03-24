@@ -1,6 +1,8 @@
 <% from_user = notification.from_user %>
 <% to_user = notification.to_user %>
 
+<%= time_ago_in_words(notification.created_at).upcase %>前
+
 <%= link_to user_path(from_user) do %>   
   <%= from_user.name %>
 <% end %>
@@ -22,5 +24,3 @@
       <% end %>にコメントしました！
     </p>
 <% end %>
-
-<%= time_ago_in_words(notification.created_at).upcase %> ago

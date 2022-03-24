@@ -84,4 +84,8 @@ group :production do
   gem 'mysql2'
 end
 
+# 20220325 文言の日本語化用に追加
 gem 'rails-i18n'
+
+# 20220325 ページネーションのため追加
+gem 'kaminari'
