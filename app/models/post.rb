@@ -5,6 +5,11 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  
+  validates :title, presence: true
+  validates :content, presence: true
+  
+  validates :tags, associated: true
 
   # carrierwave tumbnail用の記述
   mount_uploader :thumbnail, ThumbnailUploader
@@ -20,7 +25,6 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-
   def save_tag(sent_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     old_tags = current_tags - sent_tags
@@ -33,7 +37,16 @@ class Post < ApplicationRecord
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
-   end
+    end
+  end
+  
+  def destroy_tag
+    tags = Tag.all
+      tags.each do |tag|
+        if tag.posts.count == 0
+          tag.destroy
+        end
+      end
   end
 
   # 検索用の記述

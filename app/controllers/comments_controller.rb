@@ -4,9 +4,12 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
     @comment.post_id = @post.id
-    @comment.save
-    @post.notification_comment!(current_user, @comment.id)
-    @comment = Comment.new
+    if @comment.save
+      @post.notification_comment!(current_user, @comment.id)
+      @comment = Comment.new
+    else
+      render "error"
+    end
   end
 
   def destroy
