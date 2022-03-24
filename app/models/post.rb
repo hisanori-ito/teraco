@@ -5,6 +5,10 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  
+  validates :title, presence: true
+  validates :content, presence: true
+  validates :tags, presence: true
 
   # carrierwave tumbnail用の記述
   mount_uploader :thumbnail, ThumbnailUploader
