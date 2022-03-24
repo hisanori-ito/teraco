@@ -21,3 +21,44 @@ a {
 ul {
   list-style: none;
 }
+
+.view-1 {
+  background: /*linear-gradient(-45deg, rgba(246, 255, 0, .8), rgba(255, 0, 161, .8)),*/ url(/images/girl-gd80de0ca0_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center top;
+  width: auto;
+  height: 700px;
+}
+
+.view-2 {
+  background-image: url(/images/boy-g5edbb3f0c_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center top;
+  width: auto;
+  height: 700px;
+}
+
+.view-3 {
+  background-image: url(/images/little-boy-g3c86ae65f_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 700px;
+}
+
+.view-4 {
+  background-image: url(/images/kid-gc5df99bf1_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 700px;
+  padding-bottom: 0;
+}
+
+// .container {
+//   background: linear-gradient(#05FBFF, #1E00FF);
+// }
