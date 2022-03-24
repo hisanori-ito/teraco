@@ -29,8 +29,14 @@
             <% end %>
           </li>
           <li>
-            <%= link_to notifications_path, class: 'nav-link text-white' do %>
-              🔔通知
+            <% if unchecked_notifications.any? %>
+              <%= link_to notifications_path, class: 'bell nav-link text-white' do %>
+                🔔通知
+              <% end %>
+            <% else %>
+              <%= link_to notifications_path, class: 'nav-link text-white' do %>
+                🔕通知
+              <% end %>
             <% end %>
           </li>
           <li>
