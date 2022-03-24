@@ -6,10 +6,6 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# ↓バリデーションの日本語化
-config.i18n.default_locale = :ja
-config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
-
 module Teraco
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -22,5 +18,9 @@ module Teraco
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    # ↓バリデーションの日本語化
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
   end
 end
