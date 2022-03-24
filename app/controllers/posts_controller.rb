@@ -40,12 +40,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag].split(",")
     if @post.update(post_params)
       @post.save_tag(tag_list)
-      tags = Tag.all
-      tags.each do |tag|
-        if tag.posts.count == 0
-          tag.destroy
-        end
-      end
+      @post.destroy_tag
       redirect_to post_path(@post)
     else
       render "edit"
@@ -54,13 +49,8 @@ class PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
+    post.destroy_tag
     post.destroy
-    tags = Tag.all
-    tags.each do |tag|
-      if tag.posts.count == 0
-        tag.destroy
-      end
-    end
     redirect_to posts_path
   end
 
