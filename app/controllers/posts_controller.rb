@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all.page(params[:page]).per(16)
     @tags = Tag.all
   end
 
@@ -58,13 +58,13 @@ class PostsController < ApplicationController
   def search_tag
     @tags = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @posts = @tag.posts
+    @posts = @tag.posts.page(params[:page]).per(16)
     render "index"
   end
 
   # 普通の検索
   def search
-    @posts = Post.search(params[:word])
+    @posts = Post.search(params[:word]).page(params[:page]).per(16)
     @word = params[:word]
     @tags = Tag.all
     render "index"

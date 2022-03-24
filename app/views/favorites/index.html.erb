@@ -10,6 +10,7 @@
         いいねした記事はありません😔
       <% else %>
         <%= render "favorites/index", { favorites: @favorites } %>
+        <%= paginate(@favorites) %>
       <% end %>
     </div>
   </div>

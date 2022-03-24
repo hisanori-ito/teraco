@@ -7,6 +7,7 @@
       <% else %>
         <%= render "posts/index", { posts: @posts } %>
       <% end %>
+      <%= paginate(@posts) %>
     </div>
   </div>
 </div>
