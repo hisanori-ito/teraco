@@ -64,6 +64,9 @@
         <div id="comment_area">
           <%= render 'comments/comment', post:@post %>
         </div>
+        <div id="comments_error">
+          <%= render "posts/error", post:@comment %>
+        </div>
         <div id="comment_form">
           <%= render 'comments/form', { post:@post, comment:@comment } %>
         </div>
