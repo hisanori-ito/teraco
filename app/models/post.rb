@@ -45,7 +45,7 @@ class Post < ApplicationRecord
   def bookmarked?(user)
     bookmarks.where(user_id: user).exists?
   end
-  
+
   # いいね通知用メソッド
   def notification_favorite!(current_user)
     # ↓いいねされているか確認する
@@ -64,7 +64,7 @@ class Post < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-  
+
   # コメント通知用メソッド
   def notification_comment!(current_user, comment_id)
     # ↓自分以外にコメントしている人をすべて取得し全員に通知を送る
@@ -74,7 +74,7 @@ class Post < ApplicationRecord
     end
     save_notification_comment!(current_user, comment_id, user_id) if temp_ids.blank?
   end
-  
+
   def save_notification_comment!(current_user, comment_id, to_user_id)
     # コメントは複数回することが考えられるため１つの投稿に複数回通知する
     notification = current_user.from_me_notifications.new(
@@ -89,7 +89,7 @@ class Post < ApplicationRecord
     end
     notification.save if notification.valid?
   end
-  
+
   # PageView用の追記
   is_impressionable counter_cache: true
 end

@@ -37,7 +37,12 @@ class PostsController < ApplicationController
     tag_list = params[:post][:tag].split(",")
     post.update(post_params)
     post.save_tag(tag_list)
-    # PostTag.where(post_id: nil).destroy_all タグに含まれる記事が0になったタグを自動削除したい
+    tags = Tag.all
+    tags.each do |tag|
+      if tag.posts.count == 0
+        tag.destroy
+      end
+    end
     redirect_to post_path(post)
   end
 
