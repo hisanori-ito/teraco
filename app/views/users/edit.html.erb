@@ -5,7 +5,14 @@
       <%= form_with model:@user do |f| %>
         <div class="my-3">
           <%= f.label :image, "プロフィール画像" %><br>
-          <%= f.file_field :image %>
+          <%= f.file_field :image, id: :file %>
+        </div>
+        <div>
+          <% if @user.image.present? %>
+            <%= image_tag @user.image.url, id: :prev, class: "border rounded" %>
+          <% else %>
+            <%= image_tag "kids-g837321511_640.png", id: :prev, class: "border rounded" %>
+          <% end %>
         </div>
         <div class="my-3">
           <%= f.label :name, "名前" %><br>

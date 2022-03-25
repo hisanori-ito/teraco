@@ -1,6 +1,7 @@
 class BookmarksController < ApplicationController
   
   before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:index]
   
   def index
     @bookmarks = Bookmark.where(user_id: params[:user_id]).page(params[:page]).per(16)
@@ -20,4 +21,14 @@ class BookmarksController < ApplicationController
       bookmark.destroy
     end
   end
+  
+  private
+
+  def ensure_correct_user
+    @user = User.find(params[:user_id])
+    unless @user == current_user
+      redirect_to user_bookmarks_path(current_user)
+    end
+  end
+
 end

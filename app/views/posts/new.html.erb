@@ -9,11 +9,19 @@
         </div>
         <div class="my-3">
           <%= f.label :thumbnail, "サムネイル画像" %><br>
-          <%= f.file_field :thumbnail %>
+          <%= f.file_field :thumbnail, id: :file %>
+        </div>
+        <div>
+          <%= image_tag "kids-g837321511_640.png", id: :prev, class: "border border-3 rounded" %>
         </div>
         <div class="my-3">
           <%= f.label :video, "動画" %><br>
-          <%= f.file_field :video %>
+          <%= f.file_field :video, id: :file_video %>
+        </div>
+        <div id="prev_video" >
+          <% if @post.video.present? %>
+            <%= video_tag @post.video %>
+          <% end %>
         </div>
         <div class="my-3">
           <%= f.label :content, "記事の内容" %><br>

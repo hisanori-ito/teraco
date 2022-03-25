@@ -9,11 +9,23 @@
         </div>
         <div class="my-3">
           <%= f.label :thumbnail, "サムネイル画像" %><br>
-          <%= f.file_field :thumbnail %>
+          <%= f.file_field :thumbnail, id: :file %>
+        </div>
+        <div>
+          <% if @post.thumbnail.present? %>
+            <%= image_tag @post.thumbnail.url, id: :prev, class: "border rounded" %>
+          <% else %>
+            <%= image_tag "kids-g837321511_640.png", id: :prev, class: "border rounded" %>
+          <% end %>
         </div>
         <div class="my-3">
           <%= f.label :video, "動画" %><br>
-          <%= f.file_field :video %>
+          <%= f.file_field :video, id: :file_video %>
+        </div>
+        <div id="prev_video" >
+          <% if @post.video.present? %>
+            <%= video_tag(@post.video.to_s, :controls => true, class: "border rounded" ) %>
+          <% end %>
         </div>
         <div class="my-3">
           <%= f.label :content, "記事の内容" %><br>
