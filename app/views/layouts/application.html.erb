@@ -13,8 +13,15 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
-    <%= yield %>
-    <%= render "layouts/footer" %>
+    <div class="cocoon">
+      <%= render 'layouts/header' %>
+      <%= yield %>
+      <span id="up">
+        <a href="">
+          <%= image_tag "arrow-g98bebf60d_1280.png", data: {"turbolinks"=>false}, class: "up" %>
+        </a>
+      </span>
+      <%= render "layouts/footer" %>
+    </div>
   </body>
 </html>

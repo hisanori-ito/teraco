@@ -2,14 +2,6 @@
   font-family: 'Kaisei Decol', serif;
 }
 
-h1 {
-  color: red;
-}
-
-.contents {
-  color: blue;
-}
-
 a {
   text-decoration: none !important;
 }
@@ -56,7 +48,31 @@ ul {
   background-position: center center;
   width: auto;
   height: 700px;
-  padding-bottom: 0;
+}
+
+#up {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.up{
+  width: 50px;
+  height: 50px;
+}
+
+.cocoon {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.promise {
+  color: white;
 }
 
 // .container {

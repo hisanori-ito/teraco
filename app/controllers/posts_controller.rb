@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show, :search_tag, :search]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -74,5 +75,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :thumbnail, :video, :content)
+  end
+  
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to posts_path
+    end
   end
 end

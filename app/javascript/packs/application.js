@@ -12,6 +12,7 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application" 
+import "scripts"
 
 
 import '../stylesheets/mystyle.scss'
@@ -19,3 +20,4 @@ import '../stylesheets/mystyle.scss'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+

@@ -3,10 +3,11 @@
 
 <%= time_ago_in_words(notification.created_at).upcase %>前
 
+<p>
 <%= link_to user_path(from_user) do %>   
   <%= from_user.name %>
-<% end %>
-さんが
+<% end %>さんが
+</p>
 
 <% case notification.action
   when "follow"%>
