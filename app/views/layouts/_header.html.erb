@@ -50,7 +50,7 @@
             <% end %>
           </li>
         <% else %>
-           <li>
+          <li>
             <%= link_to root_path, class: 'nav-link text-white' do %>
               🏠トップ
             <% end %>
@@ -73,6 +73,11 @@
           <li>
             <%= link_to new_user_session_path, class: 'nav-link text-white' do %>
               🚪ログイン
+            <% end %>
+          </li>
+          <li>
+            <%= link_to users_guest_sign_in_path, method: :post, class: 'nav-link text-white' do %>
+              🎩ゲストログイン
             <% end %>
           </li>
         <% end %>
