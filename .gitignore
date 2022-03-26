@@ -44,6 +44,3 @@ yarn-debug.log*
 
 # for mail SNSauth deploy
 /.env
-
-# for top_image
-/public/images

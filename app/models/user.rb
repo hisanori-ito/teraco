@@ -66,5 +66,13 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+  
+  # ↓ゲストログイン用
+  def self.guest
+    find_or_create_by!(email: 'guest@guest') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲスト"
+    end
+  end
 
 end
