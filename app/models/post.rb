@@ -5,11 +5,15 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  
+
+  # before_update :patch_tags
+
+  # validates_associated :post_tags
+  # validates_associated :tags
+
   validates :title, presence: true
   validates :content, presence: true
-  
-  validates :tags, associated: true
+  validate :validate_tag
 
   # carrierwave tumbnail用の記述
   mount_uploader :thumbnail, ThumbnailUploader
@@ -25,21 +29,43 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-  def save_tag(sent_tags)
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
-    old_tags = current_tags - sent_tags
-    new_tags = sent_tags - current_tags
+  # def save_tag(sent_tags)
+  #   current_tags = self.tags.pluck(:name) unless self.tags.nil?
+  #   old_tags = current_tags - sent_tags
+  #   new_tags = sent_tags - current_tags
 
-    old_tags.each do |old|
-      self.tags.delete Tag.find_by(name: old)
-    end
+  #   old_tags.each do |old|
+  #     self.tags.delete Tag.find_by(name: old)
+  #   end
 
-    new_tags.each do |new|
-      new_post_tag = Tag.find_or_create_by(name: new)
-      self.tags << new_post_tag
+  #   new_tags.each do |new|
+  #     new_post_tag = Tag.find_or_create_by(name: new)
+  #     self.tags << new_post_tag
+  #   end
+  # end
+
+  def attach_tags(tag_strings)
+    tag_strings.each do |new|
+      new_post_tag = Tag.find_or_initialize_by(name: new)
+      post_tags.build({tag: new_post_tag})
     end
   end
-  
+
+  def fix_tags(tag_strings)
+      current_tags = self.tags.pluck(:name) unless self.tags.nil?
+      old_tags = current_tags - tag_strings
+      new_tags = tag_strings - current_tags
+
+      old_tags.each do |old|
+        self.tags.delete Tag.find_by(name: old)
+      end
+      
+      new_tags.each do |new|
+        new_post_tag = Tag.find_or_initialize_by(name: new)
+        post_tags.build({tag: new_post_tag})
+      end
+  end
+
   def destroy_tag
     tags = Tag.all
       tags.each do |tag|
@@ -47,6 +73,12 @@ class Post < ApplicationRecord
           tag.destroy
         end
       end
+  end
+
+  def validate_tag
+    if post_tags.size == 0
+      errors.add(:🏷, "タグを入力してください")
+    end
   end
 
   # 検索用の記述
