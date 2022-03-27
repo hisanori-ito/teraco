@@ -5,6 +5,8 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  
+  has_rich_text :content
 
   # before_update :patch_tags
 
