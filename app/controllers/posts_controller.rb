@@ -21,9 +21,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.page(params[:page]).per(16)
+    @posts = Post.all.order(created_at: :desc).page(params[:page]).per(16)
     @tags = Tag.all
-    @counts = Post.all
   end
 
   def show
@@ -78,7 +77,35 @@ class PostsController < ApplicationController
     @tags = Tag.all
     render "index"
   end
-
+  
+  def rank_favorite
+    @rank = Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))
+    @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
+    @tags = Tag.all
+    render "index"
+  end
+  
+  def rank_comment
+    @rank = Post.find(Comment.group(:post_id).order('count(post_id) desc').pluck(:post_id))
+    @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
+    @tags = Tag.all
+    render "index"
+  end
+  
+  def rank_bookmark
+    @rank = Post.find(Bookmark.group(:post_id).order('count(post_id) desc').pluck(:post_id))
+    @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
+    @tags = Tag.all
+    render "index"
+  end
+  
+  def rank_view
+    @rank = Post.find(Impression.group(:impressionable_id).order('count(impressionable_id) desc').pluck(:impressionable_id))
+    @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
+    @tags = Tag.all
+    render "index"
+  end
+  
   private
 
   def post_params
