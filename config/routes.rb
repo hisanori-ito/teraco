@@ -24,8 +24,12 @@ Rails.application.routes.draw do
   end
 
   get 'search_tag' => 'posts#search_tag'
-
   get 'search' => 'posts#search'
+  
+  get 'rank_favorite' => 'posts#rank_favorite'
+  get 'rank_comment' => 'posts#rank_comment'
+  get 'rank_bookmark' => 'posts#rank_bookmark'
+  get 'rank_view' => 'posts#rank_view'
 
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resource :relationships, only: [:create, :destroy]
