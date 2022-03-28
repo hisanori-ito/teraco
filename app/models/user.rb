@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   
+  has_rich_text :introduction
+  
   validates :name, presence: true
   validates :email, presence: true
 

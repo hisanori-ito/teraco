@@ -18,9 +18,9 @@
           <%= f.label :video, "動画" %><br>
           <%= f.file_field :video, id: :file_video %>
         </div>
-        <div id="prev_video" >
+        <div id="prev_video">
           <% if @post.video.present? %>
-            <%= video_tag @post.video %>
+            <%= video_tag @post.video, class: "border border-3 rounded" %>
           <% end %>
         </div>
         <div class="my-3">

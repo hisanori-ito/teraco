@@ -2,14 +2,11 @@
   <% posts.each do |post| %>
     <div class="card shadow-lg rounded w-25" style="width: 20rem;">
       <% if post.thumbnail? %>
-        <%= image_tag post.thumbnail.url, class: "card-img-top", width: '100%', height: 'auto' %>
+        <%= image_tag post.thumbnail.url, class: "card-img-top my-5 ", width: '100%', height: 'auto' %>
       <% else %>
         <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
       <% end %>
       <div class="card-body pb-0">
-        <!--<!% if post.tags.count == 0 %>-->
-        <!--  <p>タグはまだありません</p>-->
-        <!--<!% else %>-->
         <% post.tags.each do |tag| %>
           <%= link_to search_tag_path(tag_id: tag.id) do %>
             🏷<%= tag.name %>

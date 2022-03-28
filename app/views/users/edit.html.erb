@@ -24,7 +24,7 @@
         </div>
         <div class="my-3">
           <%= f.label :introduction, "紹介文" %><br>
-          <%= f.text_area :introduction, rows: "10", placeholder: "あなたの紹介文を入力してください", class: "w-100 h-100" %>
+          <%= f.rich_text_area :introduction, rows: "10", placeholder: "あなたの紹介文を入力してください", class: "w-100 h-100" %>
         </div>
         <div class="mt-5">
           <%= f.submit "プロフィールを修正する！", class: "w-100 btn btn-outline-info" %>
