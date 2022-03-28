@@ -25,7 +25,7 @@
           <% end %>
         </h5>
         <p class="card-text">
-          <%= fav.post.content.truncate(10) %>
+          <%= strip_tags(fav.post.content.to_s).gsub(/[\n]/,"").strip.truncate(10) %>
         </p>
         <div class="btn btn-outline-info">
           <%= link_to post_path(fav.post) do %>
