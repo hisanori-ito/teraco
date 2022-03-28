@@ -2,7 +2,7 @@
   <%= render "posts/search", { tags: @tags, word: @word } %>
   <%= render "posts/rank" %>
   <div class="row">
-    <div class="col-lg-12 text-center">
+    <div class="col-lg-12 text-center center-block">
       <% if @posts.count == 0 %>
         <div class="mt-5">
           <p>
@@ -12,7 +12,9 @@
       <% else %>
         <%= render "posts/index", { posts: @posts } %>
       <% end %>
-      <%= paginate(@posts) %>
+      <div class="mt-3">
+        <%= paginate(@posts) %>
+      </div>
     </div>
   </div>
 </div>
