@@ -1,9 +1,6 @@
 <div class="container">
   <%= render "posts/search", { tags: @tags, word: @word } %>
-  <%= link_to "いいね順", rank_favorite_path %>
-  <%= link_to "コメント数順", rank_comment_path %>
-  <%= link_to "ブックマーク数順", rank_bookmark_path %>
-  <%= link_to "PV数順", rank_view_path %>
+  <%= render "posts/rank" %>
   <div class="row">
     <div class="col-lg-12 text-center">
       <% if @posts.count == 0 %>
