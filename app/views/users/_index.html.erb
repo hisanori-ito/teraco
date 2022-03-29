@@ -1,0 +1,26 @@
+<div class="d-flex flex-wrap mt-4">
+  <% users.each do |user| %>
+    <div class="card shadow-lg rounded w-25" style="width: 20rem;">
+      <% if user.image? %>
+        <%= image_tag user.image.url, class: "card-img-top pt-5 mt-5", width: '100%', height: 'auto' %>
+      <% else %>
+        <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
+      <% end %>
+      <div class="card-body text-center">
+        <h5 class="card-title text-center">
+          <%= user.name %>
+        </h5>
+        <p class="card-text text-center">
+          <% if user.introduction? %>
+            <%= strip_tags(user.introduction.to_s).gsub(/[\n]/,"").strip.truncate(10) %>
+          <% end %>
+        </p>
+        <div class="btn btn-outline-info">
+          <%= link_to user_path(user) do %>
+            プロフィールを読む
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

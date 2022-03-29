@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h2 class="font-weight-bold mt-3">ブックマークした記事</h2>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col-lg-12 text-center">
+      <% if @bookmarks.count == 0 %>
+        ブックマークした記事はありません😔
+      <% else %>
+        <%= render "bookmarks/index", { bookmarks: @bookmarks } %>
+        <div class="mt-3">
+          <%= paginate(@bookmarks) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

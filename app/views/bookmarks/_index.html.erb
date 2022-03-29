@@ -1,0 +1,37 @@
+<div class="d-flex flex-wrap mt-4">
+  <% bookmarks.each do |bookmark| %>
+    <div class="card shadow-lg rounded w-25" style="width: 20rem;">
+      <% if bookmark.post.thumbnail? %>
+        <%= image_tag bookmark.post.thumbnail.url, class: "card-img-top my-5", width: '100%', height: 'auto' %>
+      <% else %>
+        <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
+      <% end %>
+      <div class="card-body">
+        <% bookmark.post.tags.each do |tag| %>
+          <%= link_to search_tag_path(tag_id: tag.id) do %>
+            🏷<%= tag.name %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= bookmark.post.title %>
+        </h5>
+        <p class="card-text">
+          <%= strip_tags(bookmark.post.content.to_s).gsub(/[\n]/,"").strip.truncate(10) %>
+        </p>
+        <div class="btn btn-outline-info">
+          <%= link_to post_path(bookmark.post) do %>
+              記事を読む
+          <% end %>
+        </div>
+        <div class="card-body pl-1 pb-0 pt-2">
+          ❤️<%= bookmark.post.favorites.count %>
+          💬<%= bookmark.post.comments.count %>
+          🔖<%= bookmark.post.bookmarks.count %>
+          👀<%= bookmark.post.impressions_count %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,114 @@
+// フォント変更
+* {
+  font-family: 'Kaisei Decol', serif;
+}
+
+// topページ
+.top-text {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.view-1 {
+  background: url(/images/girl-gd80de0ca0_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center top;
+  width: auto;
+  height: 700px;
+}
+
+.view-2 {
+  background-image: url(/images/boy-g5edbb3f0c_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center top;
+  width: auto;
+  height: 700px;
+}
+
+.view-3 {
+  background-image: url(/images/little-boy-g3c86ae65f_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 700px;
+}
+
+.view-4 {
+  background-image: url(/images/kid-gc5df99bf1_1920.jpg);
+  background-size: cover;
+  background-repeat:  no-repeat;
+  background-position: center center;
+  width: auto;
+  height: 700px;
+}
+
+.promise {
+  color: white;
+}
+
+// footerの固定処理
+.cocoon {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
+
+// 上へ戻るボタン
+#up {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.up{
+  width: 50px;
+  height: 50px;
+}
+
+// ヘッダーの通知処理
+.bell {
+  background-color: orange;
+  border-radius: 30px;
+}
+
+// リンク先の下線非表示
+a {
+  text-decoration: none !important;
+}
+
+// エラー文
+.error {
+  list-style: none;
+}
+
+// ページネーション
+.pagination>li>a {          
+  border: none;
+  color: #696969;
+}
+
+.pagination>.active>a {     
+  border-radius: 30px; 
+}
+rai
+
+.pagination>li>a:hover {        
+  border-radius: 30px; 
+}
+
+.pagination {
+  justify-content: center;
+}
+
+// フォームプレヴュー機能
+#prev {
+  height: 300px;
+  width: auto;
+}
+

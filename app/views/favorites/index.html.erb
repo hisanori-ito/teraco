@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h2 class="font-weight-bold mt-3">いいねした記事</h2>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col-lg-12 text-center">
+      <% if @favorites.count == 0 %>
+        いいねした記事はありません😔
+      <% else %>
+        <%= render "favorites/index", { favorites: @favorites } %>
+        <div class="mt-3">
+          <%= paginate(@favorites) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

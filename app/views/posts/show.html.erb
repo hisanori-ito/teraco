@@ -1,0 +1,98 @@
+<div class="container mb-5">
+  <div class="row mt-4 mb-3">
+    <div class="col-lg-12">
+      <% if @post.video? %>
+        <div class="d-flex justify-content-around">
+          <div class="w-50 pr-2">
+            <% if @post.thumbnail? %>
+              <%= image_tag @post.thumbnail.url, class: "rounded", width: '100%', height: 'auto' %>
+            <% else %>
+                <%= image_tag "kids-g837321511_640.png" , class: "rounded", width: 'auto', height: '500px' %>
+            <% end %>
+          </div>
+          <div class="w-50 pl-2">
+            <%= video_tag(@post.video.to_s, :controls => true, class: "rounded", width: '100%', height: 'auto' ) %>
+          </div>
+        </div>
+      <% else %>
+        <div class="w-100">
+          <% if @post.thumbnail? %>
+            <%= image_tag @post.thumbnail.url, class: "d-block mx-auto rounded", width: '100%', height: 'auto' %>
+          <% else %>
+              <%= image_tag "kids-g837321511_640.png", class: "d-block mx-auto rounded", width: 'auto', height: '500px' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div "col-lg-12">
+      <% @tags.each do |tag| %>
+        <%= link_to search_tag_path(tag_id: tag.id) do %>
+          🏷<%= tag.name %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 my-3 d-flex justify-content-around align-items-end">
+      <h1 class="mr-3"><%= @post.title %></h3>
+      <h5 class="mx-5 pt-2">投稿者
+          <%= link_to user_path(@post.user) do %>
+            <%= @post.user.name %>
+          <% end %>
+          さん
+      </h5>
+      <h6 class="pt-2">投稿日 <%= @post.created_at.strftime("%Y/%m/%d") %></h6>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 mt-4">
+      <p><%= @post.content %></p>
+    </div>
+  </div>
+  <% if @post.user == current_user %>
+  <div class="row">
+    <div class="col-lg-12 my-3 d-flex justify-content-around">
+      <div>
+        <%= link_to "🤔記事を編集する", edit_post_path(@post), class: "btn btn-outline-info" %>
+      </div>
+      <div>
+        <%= link_to "🗑記事を削除する", post_path, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="col-lg-12">
+      <!--ログインしなければいいね、コメント、ブックマークは使えない-->
+      <% if user_signed_in? %>
+        <div class="d-flex justify-content-around my-3">
+          <div id="favorite">
+            <%= render 'favorites/favorite', post:@post %>
+          </div>
+          <div id="bookmark">
+            <%= render 'bookmarks/bookmark', post:@post %>
+          </div>
+        </div>
+        <div id="comment_area">
+          <%= render 'comments/comment', post:@post %>
+        </div>
+        <div id="comments_error">
+          <%= render "posts/error", post:@comment %>
+        </div>
+        <div id="comment_form">
+          <%= render 'comments/form', { post:@post, comment:@comment } %>
+        </div>
+      <% else %>
+        <ul>
+          <li>❤️️いいね</li>
+          <li>💬コメント</li>
+          <li>🔖ブックマーク</li>
+          <li>🎒ユーザーの詳細確認</li>
+        </ul>
+         は<%= link_to "ログイン", new_user_session_path %>しなければできません😔
+      <% end %>
+    </div>
+  </div>
+</div>

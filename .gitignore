@@ -38,3 +38,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# for carrierwave
+/public/uploads
+
+# for mail SNSauth deploy
+/.env
