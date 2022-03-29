@@ -2,24 +2,20 @@
   <% posts.each do |post| %>
     <div class="card shadow-lg rounded w-25" style="width: 20rem;">
       <% if post.thumbnail? %>
-        <%= image_tag post.thumbnail.url, class: "card-img-top my-5 ", width: '100%', height: 'auto' %>
+        <%= image_tag post.thumbnail.url, class: "card-img-top my-5", width: '100%', height: 'auto' %>
       <% else %>
         <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
       <% end %>
-      <div class="card-body pb-0">
+      <div class="card-body">
         <% post.tags.each do |tag| %>
           <%= link_to search_tag_path(tag_id: tag.id) do %>
             🏷<%= tag.name %>
           <% end %>
         <% end %>
-        <!--<!% end %>-->
-        <!--<#%= post.tags.map(&:name).join(', ') %>-->
       </div>
       <div class="card-body">
         <h5 class="card-title">
-          <%= link_to post_path(post) do %>
-            <%= post.title %>
-          <% end %>
+          <%= post.title %>
         </h5>
         <p class="card-text">
           <%= strip_tags(post.content.to_s).gsub(/[\n]/,"").strip.truncate(10) %>

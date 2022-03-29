@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'search_tag' => 'posts#search_tag'
   get 'search' => 'posts#search'
   
+  get 'sort_time' => 'posts#sort_time'
   get 'rank_favorite' => 'posts#rank_favorite'
   get 'rank_comment' => 'posts#rank_comment'
   get 'rank_bookmark' => 'posts#rank_bookmark'

@@ -4,9 +4,11 @@
       <% notifications = @notifications.where.not(from_user_id: current_user.id) %>
       <% if notifications.exists? %>
         <%= render notifications %>
-        <%= paginate(notifications) %>
+        <div class="mt-3">
+          <%= paginate(notifications) %>
+        </div>
       <% else %>
-        <p class="text-center mt-5">通知はありません</p>
+        <p class="text-center mt-5">通知はありません😔</p>
       <% end %>
     </div>
   </div>

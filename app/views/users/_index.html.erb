@@ -2,7 +2,7 @@
   <% users.each do |user| %>
     <div class="card shadow-lg rounded w-25" style="width: 20rem;">
       <% if user.image? %>
-        <%= image_tag user.image.url, class: "card-img-top", width: '100%', height: 'auto' %>
+        <%= image_tag user.image.url, class: "card-img-top pt-5 mt-5", width: '100%', height: 'auto' %>
       <% else %>
         <%= image_tag "kids-g837321511_640.png" ,class: "card-img-top", width: '100%', height: 'auto' %>
       <% end %>

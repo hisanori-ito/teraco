@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.page(params[:page]).per(16)
+    @users = User.all.order("RANDOM()").page(params[:page]).per(16)
   end
 
   def show
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :image, :email, :introduction)
   end
-  
+
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user

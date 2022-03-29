@@ -1,9 +1,9 @@
 <div class="row mt-4">
   <div class="col-lg-12 text-center">
-      <%= form_with url: search_path, method: :get, local: true do |f| %>
-        <%= f.text_field :word, value: word, placeholder: "記事の検索" %>
-        <%= f.submit "🔍", class: "btn btn-outline-info" %>
-      <% end %>
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :word, value: word, placeholder: "記事の検索" %>
+      <%= f.submit "🔍", class: "btn btn-outline-info" %>
+    <% end %>
   </div>
 </div>
 <div class="row mt-4">
