@@ -1,7 +1,7 @@
 <div class="container">
   <%= render "posts/error", post:@user %>
-  <div class="row">
-    <div class="col-lg-12 px-5 px-sm-0 mx-auto">
+  <div class="row mb-5">
+    <div class="col-lg-12">
       <%= form_with model:@user do |f| %>
         <div class="my-3">
           <%= f.label :image, "プロフィール画像" %><br>
@@ -24,7 +24,7 @@
         </div>
         <div class="my-3">
           <%= f.label :introduction, "紹介文" %><br>
-          <%= f.text_area :introduction, rows: "10", placeholder: "あなたの紹介文を入力してください", class: "w-100 h-100" %>
+          <%= f.rich_text_area :introduction, rows: "10", placeholder: "あなたの紹介文を入力してください", class: "w-100 h-100" %>
         </div>
         <div class="mt-5">
           <%= f.submit "プロフィールを修正する！", class: "w-100 btn btn-outline-info" %>

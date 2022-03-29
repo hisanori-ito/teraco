@@ -1,11 +1,9 @@
-<% if user != current_user %>
-  <% if current_user.following?(user) %>
-    <%= link_to user_relationships_path(user), class: "btn btn-outline-danger", remote:true, method: :delete do %>
-       フォローやめる...
-    <% end %>
-  <% else %>
-    <%= link_to user_relationships_path(user), class: "btn btn-outline-info", remote:true, method: :post do %>
-       フォローする！
-    <% end %>
+<% if current_user.following?(user) %>
+  <%= link_to user_relationships_path(user), class: "btn btn-outline-danger", remote:true, method: :delete do %>
+     フォローやめる
+  <% end %>
+<% else %>
+  <%= link_to user_relationships_path(user), class: "btn btn-outline-info", remote:true, method: :post do %>
+     フォローする
   <% end %>
 <% end %>

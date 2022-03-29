@@ -5,23 +5,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
     <style>@import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&display=swap');</style>
-    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <div class="cocoon">
-      <%= render 'layouts/header' %>
+      <%= render "layouts/header" %>
       <%= yield %>
-      <span id="up">
-        <a href="">
-          <%= image_tag "arrow-g98bebf60d_1280.png", data: {"turbolinks"=>false}, class: "up" %>
-        </a>
-      </span>
+      <%= render "layouts/up_button" %>
       <%= render "layouts/footer" %>
     </div>
   </body>

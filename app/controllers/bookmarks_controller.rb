@@ -4,7 +4,7 @@ class BookmarksController < ApplicationController
   before_action :ensure_correct_user, only: [:index]
   
   def index
-    @bookmarks = Bookmark.where(user_id: params[:user_id]).page(params[:page]).per(16)
+    @bookmarks = Bookmark.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page]).per(16)
     @user = User.find(params[:user_id])
   end
   

@@ -1,21 +1,15 @@
+// フォント変更
 * {
   font-family: 'Kaisei Decol', serif;
 }
 
-a {
-  text-decoration: none !important;
-}
-
-.bell {
-  background-color: orange;
-}
-
-ul {
-  list-style: none;
+// topページ
+.top-text {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 .view-1 {
-  background: /*linear-gradient(-45deg, rgba(246, 255, 0, .8), rgba(255, 0, 161, .8)),*/ url(/images/girl-gd80de0ca0_1920.jpg);
+  background: url(/images/girl-gd80de0ca0_1920.jpg);
   background-size: cover;
   background-repeat:  no-repeat;
   background-position: center top;
@@ -50,6 +44,22 @@ ul {
   height: 700px;
 }
 
+.promise {
+  color: white;
+}
+
+// footerの固定処理
+.cocoon {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
+
+// 上へ戻るボタン
 #up {
   position: fixed;
   right: 20px;
@@ -61,20 +71,44 @@ ul {
   height: 50px;
 }
 
-.cocoon {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+// ヘッダーの通知処理
+.bell {
+  background-color: orange;
+  border-radius: 30px;
 }
 
-footer {
-  margin-top: auto;
+// リンク先の下線非表示
+a {
+  text-decoration: none !important;
 }
 
-.promise {
-  color: white;
+// エラー文
+.error {
+  list-style: none;
 }
 
-// .container {
-//   background: linear-gradient(#05FBFF, #1E00FF);
-// }
+// ページネーション
+.pagination>li>a {          
+  border: none;
+  color: #696969;
+}
+
+.pagination>.active>a {     
+  border-radius: 30px; 
+}
+rai
+
+.pagination>li>a:hover {        
+  border-radius: 30px; 
+}
+
+.pagination {
+  justify-content: center;
+}
+
+// フォームプレヴュー機能
+#prev {
+  height: 300px;
+  width: auto;
+}
+

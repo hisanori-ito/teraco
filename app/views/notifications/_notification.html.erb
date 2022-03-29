@@ -1,27 +1,45 @@
 <% from_user = notification.from_user %>
 <% to_user = notification.to_user %>
 
-<%= time_ago_in_words(notification.created_at).upcase %>前
-
-<p>
-<%= link_to user_path(from_user) do %>   
-  <%= from_user.name %>
-<% end %>さんが
-</p>
-
-<% case notification.action
-  when "follow"%>
-    <p>あなたをフォローしました！</p>
-  <% when "favorite" %>
-    <p>
-      <%= link_to post_path(notification.post) do %>
-        あなたの投稿
-      <% end %>にいいねしました！
-    </p>
-  <% when "comment" %>
-    <p>
-      <%= link_to post_path(notification.post) do %>
-        あなたの投稿
-      <% end %>にコメントしました！
-    </p>
-<% end %>
+<div class="mt-3">
+  <div class="badge badge-pill badge-info">
+    <%= time_ago_in_words(notification.created_at).upcase %>前
+  </div>
+  <div class="mt-1">
+    <%= link_to user_path(from_user) do %>
+      <%= from_user.name %>
+    <% end %>さんが
+  </div>
+  <div>
+    <% case notification.action
+      when "follow"%>
+        <p>あなたをフォローしました！</p>
+      <% when "favorite" %>
+        <p>
+          <%= link_to post_path(notification.post) do %>
+            あなたの投稿
+          <% end %>にいいねしました！
+        </p>
+      <% when "comment" %>
+        <% if notification.post.user_id == to_user.id %>
+          <p>
+            <%= link_to post_path(notification.post) do %>
+              あなたの投稿
+            <% end %>にコメントしました！
+            <div class="border-left rounded">
+              <%= Comment.find_by(id: notification.comment_id)&.comment %>
+            </div>
+          </p>
+        <% else %>
+          <p>
+            <%= link_to post_path(notification.post) do %>
+              <%= notification.post.user.name %>さんの投稿
+            <% end %>にコメントしました！
+            <div class="border-left rounded">
+              <%= Comment.find_by(id: notification.comment_id)&.comment %>
+            </div>
+          </p>
+        <% end %>
+    <% end %>
+  </div>
+</div>

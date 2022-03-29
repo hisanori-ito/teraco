@@ -1,5 +1,5 @@
 <% if post.favorited_by?(current_user) %>
-  <%= link_to "❤️", post_favorites_path(post), remote: true, method: :delete %>
+  <%= link_to "❤️いいねをやめる", post_favorites_path(post), remote: true, method: :delete %>
 <% else %>
-  <%= link_to "🤍", post_favorites_path(post), remote: true, method: :post %>
+  <%= link_to "🤍いいねをつける", post_favorites_path(post), remote: true, method: :post %>
 <% end %>
