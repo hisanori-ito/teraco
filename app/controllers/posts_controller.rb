@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order("RANDOM()").page(params[:page]).per(16)
+    @posts = Post.all.order("RAND()").page(params[:page]).per(16)
     @tags = Tag.all
   end
 

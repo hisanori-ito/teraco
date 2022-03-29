@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.order("RANDOM()").page(params[:page]).per(16)
+    @users = User.all.order("RAND()").page(params[:page]).per(16)
   end
 
   def show
