@@ -3,6 +3,8 @@
 /* global reader */
 /* global $fileField */
 /* global file */
+
+// 上へ戻るボタン
 $(function() {
   $('#up a').on('click',function(event){
     $('body, html').animate({
@@ -12,6 +14,7 @@ $(function() {
   });
 });
 
+// 画像プレビュー
 document.addEventListener("turbolinks:load", function() {
   $(function() {
     function readURL(input) {
@@ -29,6 +32,7 @@ document.addEventListener("turbolinks:load", function() {
   });
 })
 
+// 動画プレビュー
 $(document).on('turbolinks:load', function() {
   $fileField = $('#file_video');
 

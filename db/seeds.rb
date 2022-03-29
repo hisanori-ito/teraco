@@ -8,8 +8,8 @@
 
 users = User.create!(
   [
-    {email: 'taro@taro', name: 'たろう', password: 'password')},
-    {email: 'jiro@jiro', name: 'じろう', password: 'password')},
-    {email: 'hana@hana', name: 'はな', password: 'password')}
+    {email: 'taro@taro', name: 'たろう', password: 'password'},
+    {email: 'jiro@jiro', name: 'じろう', password: 'password'},
+    {email: 'hana@hana', name: 'はな', password: 'password'}
   ]
 )

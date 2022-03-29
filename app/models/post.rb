@@ -8,11 +8,6 @@ class Post < ApplicationRecord
   
   has_rich_text :content
 
-  # before_update :patch_tags
-
-  # validates_associated :post_tags
-  # validates_associated :tags
-
   validates :title, presence: true
   validates :content, presence: true
   validate :validate_tag
@@ -31,21 +26,7 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-  # def save_tag(sent_tags)
-  #   current_tags = self.tags.pluck(:name) unless self.tags.nil?
-  #   old_tags = current_tags - sent_tags
-  #   new_tags = sent_tags - current_tags
-
-  #   old_tags.each do |old|
-  #     self.tags.delete Tag.find_by(name: old)
-  #   end
-
-  #   new_tags.each do |new|
-  #     new_post_tag = Tag.find_or_create_by(name: new)
-  #     self.tags << new_post_tag
-  #   end
-  # end
-
+  # タグ記録用
   def attach_tags(tag_strings)
     tag_strings.each do |new|
       new_post_tag = Tag.find_or_initialize_by(name: new)
@@ -53,6 +34,7 @@ class Post < ApplicationRecord
     end
   end
 
+  #タグ編集用の記述
   def fix_tags(tag_strings)
       current_tags = self.tags.pluck(:name) unless self.tags.nil?
       old_tags = current_tags - tag_strings
@@ -68,6 +50,7 @@ class Post < ApplicationRecord
       end
   end
 
+  #余計なタグを残さない
   def destroy_tag
     tags = Tag.all
       tags.each do |tag|
@@ -77,6 +60,7 @@ class Post < ApplicationRecord
       end
   end
 
+  #タグバリデーションチェック
   def validate_tag
     if post_tags.size == 0
       errors.add(:🏷, "タグを入力してください")

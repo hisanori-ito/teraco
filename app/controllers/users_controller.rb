@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
+    # "RAND()"は本番環境用の記述。開発時は"RANDOM()"にする
     @users = User.all.order("RAND()").page(params[:page]).per(16)
   end
 
