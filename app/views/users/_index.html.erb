@@ -12,7 +12,7 @@
         </h5>
         <p class="card-text text-center">
           <% if user.introduction? %>
-            <%= user.introduction.truncate(10) %>
+            <%= strip_tags(user.introduction.to_s).gsub(/[\n]/,"").strip.truncate(10) %>
           <% end %>
         </p>
         <div class="btn btn-outline-info">

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_user!, except: [:index, :show, :search_tag, :search]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def new
@@ -77,35 +77,35 @@ class PostsController < ApplicationController
     @tags = Tag.all
     render "index"
   end
-  
+
   def rank_favorite
-    @rank = Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))
+    @rank = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(16).pluck(:post_id))
     @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
     @tags = Tag.all
     render "index"
   end
-  
+
   def rank_comment
-    @rank = Post.find(Comment.group(:post_id).order('count(post_id) desc').pluck(:post_id))
+    @rank = Post.find(Comment.group(:post_id).order('count(post_id) desc').limit(16).pluck(:post_id))
     @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
     @tags = Tag.all
     render "index"
   end
-  
+
   def rank_bookmark
-    @rank = Post.find(Bookmark.group(:post_id).order('count(post_id) desc').pluck(:post_id))
+    @rank = Post.find(Bookmark.group(:post_id).order('count(post_id) desc').limit(16).pluck(:post_id))
     @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
     @tags = Tag.all
     render "index"
   end
-  
+
   def rank_view
-    @rank = Post.find(Impression.group(:impressionable_id).order('count(impressionable_id) desc').pluck(:impressionable_id))
+    @rank = Post.find(Impression.group(:impressionable_id).order('count(impressionable_id) desc').limit(16).pluck(:impressionable_id))
     @posts = Kaminari.paginate_array(@rank).page(params[:page]).per(16)
     @tags = Tag.all
     render "index"
   end
-  
+
   private
 
   def post_params
